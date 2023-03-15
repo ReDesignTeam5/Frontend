@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import {useAuthContext} from "./useAuthContext"
 
 export const useLogin=()=>{
-    const [error, setError]= useState(null)
+    const [error_login, setError]= useState(null)
     const {dispatch}= useAuthContext()
 
     const login=(email, password)=>{
@@ -17,5 +17,5 @@ export const useLogin=()=>{
                 setError(err.message)
             })
     }
-    return {error, login}
+    return {error_login, login}
 }

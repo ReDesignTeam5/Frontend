@@ -12,7 +12,9 @@ function Level1Quiz() {
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(0);
   const navigate = useNavigate();
+
   const { question, choices, answer, image } = level1[activeQuestion];
+
   const onClickNext = () => {
     setSelectedAnswerIndex(null);
     setResult((prev) => (selectedAnswer ? prev + 1 : prev));

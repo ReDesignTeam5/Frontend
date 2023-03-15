@@ -6,7 +6,6 @@ function Level2Page(props) {
     const navigate = useNavigate();
     const [stage, setNewStage]= useState(props.stage)
     const [score, setNewScore]= useState(0)
-    
   const content=["5c","10c","20c","50c","$1"]
 
   function incrementStage(){

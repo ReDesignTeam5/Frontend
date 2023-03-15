@@ -3,16 +3,41 @@ import RegistrationBackground from "../assets/Background.svg";
 import Dino from "../assets/Dino.svg";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../firebase/useSignup";
+import { doc, setDoc } from 'firebase/firestore'
+import { useAuthContext } from "../firebase/useAuthContext";
+import {db} from '../firebase/config'
+import { useLogin } from "../firebase/useLogin";
+import { useLogout } from "../firebase/useLogout";
+
 function RegistrationPage() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const {error,signup}= useSignup()
+  const {error_signup,signup}= useSignup()
+  const {error_login, login}= useLogin()
+  const {logout}= useLogout()
+  const {user} = useAuthContext()
 
+  async function createUser(){
+    const ref=doc(db,'users',name)
+    await setDoc(ref,{
+      name: name,
+      score:[10,10,10,10,10],
+    })
+  }
+  function signUsersUp(email){
+    signup(email,'password');
+    createUser();
+    {!error_signup && navigate("/MapPage")};
+  }
+  async function signUsersIn(email){
+    await login(email,'password');
+    !error_login? alert("no user"): navigate("/MapPage");
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     var email= `${name}@gmail.com`
-    //signup(email,'password')
-    navigate("/MapPage");
+    //signUsersUp(email)
+    signUsersIn(email)
   };
 
   const handleChange = (e) => {
@@ -56,6 +81,7 @@ function RegistrationPage() {
                   className="border-2 border-gray-400 p-2 rounded-lg w-80"
                   onChange={handleChange}
                   value={name}
+                  placeholder="redesign"
                 />
                 <button
                   type="submit"
@@ -64,6 +90,7 @@ function RegistrationPage() {
                 >
                   Continue
                 </button>
+                {error_login && <p>{error_login}</p>}
               </form>
             </div>
           </div>

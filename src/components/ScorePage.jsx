@@ -26,7 +26,7 @@ function ScorePage() {
   }
   function saveScore(){
     //get user, update score and send to database
-    console.log('user')
+    console.log(user)
   }
   var starCount=[0,0,0];
   if (score==5){

@@ -14,6 +14,7 @@ function Titlepage(props) {
         backgroundImage: `url(${Background})`,
       }}
     >
+     
       <h1 className="title">{props.title} </h1>
       <button className="startbutton bg-[#ABE6EA]" type="button" onClick={handleClick}>
         Let's Go
