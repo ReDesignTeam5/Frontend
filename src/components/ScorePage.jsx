@@ -38,7 +38,7 @@ function ScorePage() {
   }
   return (
     <div
-      className="background sp-bg"
+      className="background"
       style={{ backgroundImage: `url(${MapBackground})` }}
     >
       <div className="center-container">

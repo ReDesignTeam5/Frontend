@@ -47,21 +47,13 @@ body {
   width: 100vw;
   height: 100vh;
 }
-.background_level_2{
-  background: linear-gradient(180deg, #F2EF96, #F7F4DE);
+.background_level_2 {
+  background: linear-gradient(180deg, #f2ef96, #f7f4de);
   width: 100vw;
   height: 100vh;
 }
 
-.background::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(249, 244, 204, 0.5); /* set the background color with alpha channel */
-}
+
 .tag {
   background-repeat: no-repeat;
   background-size: cover;
@@ -105,6 +97,7 @@ button {
 .center-container {
   display: flex;
   justify-content: center;
+  width: 100%;
   height: 100%;
   align-items: center;
 }
@@ -124,12 +117,14 @@ button {
   height: 250px;
 }
 .level-title {
+  display: flex;
+  justify-content: center;
   border: 10px solid;
   border-radius: 70px;
   background-color: #3592c6;
   border-color: white;
   box-shadow: 0px 0px 4px 2px #00000040;
-  width: 400px;
+  width: 550px;
   -webkit-text-stroke: 2px #1c6994;
   color: white;
   font-family: "Lemon", cursive;
@@ -137,8 +132,7 @@ button {
   text-align: center;
   text-shadow: 0px 2px 1px #3ba3c399;
   position: absolute;
-  top: 500px;
-  left: 23%;
+  top: 100px;
   padding: 20px 50px;
 }
 .score {
@@ -184,17 +178,17 @@ button {
   justify-content: space-evenly;
   position: absolute;
   top: 1200px;
-  width:100%;
- height: 200px;
+  width: 100%;
+  height: 200px;
 }
 
-.btn-center{
+.btn-center {
   display: flex;
   justify-content: center;
 }
 
-.welcome-text{
-  -webkit-text-stroke: 3px #1D6995;
+.welcome-text {
+  -webkit-text-stroke: 3px #1d6995;
   color: white;
   font-family: "Lemon", cursive;
   font-size: 70px;
@@ -205,8 +199,8 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.continue-text{
-  -webkit-text-stroke: 3px #6BAF33;
+.continue-text {
+  -webkit-text-stroke: 3px #6baf33;
   color: white;
   font-family: "Lemon", cursive;
   font-size: 70px;
@@ -224,7 +218,55 @@ button {
   right: 8px;
   bottom: 8px;
   border-radius: 20px;
-  box-shadow: inset 0 0 0 4px #3693C7, inset 0 0 0 8px white;
+  box-shadow: inset 0 0 0 4px #3693c7, inset 0 0 0 8px white;
+}
+
+.body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  
+}
+.body-text {
+  position: absolute;
+  font-family: "Lexend", sans-serif;
+  font-size: 70px;
+  text-align: center;
+  font-weight: 400;
+  width: 70%;
+  color: #6f463c;
+  top: 25%;
+}
+.coin-img {
+  width: 350px;
+  position: absolute;
+  top: 33%;
+}
+.option-btn {
+  font-family: "Lexend", sans-serif;
+  font-weight: 400;
+  font-size: 100px;
+  -webkit-text-stroke: 1px #216f9b;
+  color: white;
+  background: linear-gradient(180deg, #8dd3fb, #51baf5);
+  border-radius: 20px;
+  width: 40%;
+  text-align: center;
+  box-shadow: 0px 2px 4px #00000040;
+  margin: 25px 5%;
+  top: 50px;
+}
+
+.opt-container{
+  position: absolute;
+  top:53%;
+  width: 80%;
+}
+
+.selected-answer{
+  background: linear-gradient(180deg, #2d9be5, #268dd1);
 }
 
 

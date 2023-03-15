@@ -1,9 +1,6 @@
 import React from "react";
 import Background from "../assets/Background.svg";
 import { useNavigate } from "react-router-dom";
-import { useCollection } from '../firebase/useCollection'
-import Functions from "../firebase/Functions";
-
 
 function Titlepage(props) {
   const navigate = useNavigate();

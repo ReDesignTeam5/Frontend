@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import level1 from "../level1";
 import { useNavigate } from "react-router-dom";
+import LevelBg from "./LevelBg";
+import Lvl1bg from "../assets/level1img/Lvl1bg.svg";
+import NextButton from "./NextButton";
 
 function Level1Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -9,11 +12,11 @@ function Level1Quiz() {
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(0);
   const navigate = useNavigate();
-  const { question, choices, answer } = level1[activeQuestion];
+  const { question, choices, answer, image } = level1[activeQuestion];
   const onClickNext = () => {
     setSelectedAnswerIndex(null);
     setResult((prev) => (selectedAnswer ? prev + 1 : prev));
-    if (activeQuestion != 4) {
+    if (activeQuestion != level1.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
       setActiveQuestion(0);
@@ -24,39 +27,47 @@ function Level1Quiz() {
     setSelectedAnswerIndex(index);
     if (ans === answer) {
       setSelectedAnswer(true);
-      console.log("correct");
     } else {
       setSelectedAnswer(false);
     }
   };
-  function completeLevel() {
-    navigate("/ScorePage", {state:{score: result, level:1}});
-  }
+  
   return (
     <div>
-      <h1>Level 1</h1>
+      <LevelBg bg={Lvl1bg} lvlnum="1" />
       {!showResult ? (
         <div>
-          <h2>{question}</h2>
-          <ul>
-            {choices.map((ans, index) => (
-              <button
-                onClick={() => onAnsSelected(ans, index)}
-                key={ans}
-                className={
-                  selectedAnswerIndex === index ? "selected-answer" : null
-                }
-              >
-                {ans}
-              </button>
-            ))}
-          </ul>
-          <button onClick={onClickNext} disabled={selectedAnswerIndex === null}>
-            Next
-          </button>
+          <div className="body-container">
+            <div className="body-text">{question}</div>
+
+            <img
+              className="coin-img"
+              src={require("../assets/level1img/" + image + ".svg")}
+              alt="coin image"
+            />
+            <div className="opt-container">
+              {choices.map((ans, index) => (
+                <button
+                  onClick={() => onAnsSelected(ans, index)}
+                  key={ans}
+                  className={
+                    selectedAnswerIndex === index
+                      ? "option-btn selected-answer"
+                      : "option-btn"
+                  }
+                >
+                  {ans}
+                </button>
+              ))}
+            </div>
+          </div>
+          <NextButton
+            click={onClickNext}
+            disabledFn={selectedAnswerIndex === null}
+          />
         </div>
       ) : (
-        <button onClick={completeLevel}> complete </button>
+        navigate("/ScorePage", { state: { score: result, level: 1 } })
       )}
     </div>
   );
