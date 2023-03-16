@@ -1,5 +1,5 @@
 import React from "react";
-// import NextBtn from "../assets/NextBtn.svg";
+
 function NextButton(props) {
   return (
     <button
@@ -14,4 +14,3 @@ function NextButton(props) {
 
 export default NextButton;
 
-// backgroundImage: `url(${NextBtn})`,
