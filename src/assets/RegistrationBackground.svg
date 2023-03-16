@@ -1,5 +1,5 @@
 <svg width="320" height="568" viewBox="0 0 320 568" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="320" height="429" fill="url(#paint0_linear_48_170)"/>
+<rect width="320" height="429" fill="url(#paint0_linear_156_2)"/>
 <ellipse cx="52.5442" cy="263.702" rx="40.5442" ry="105.702" fill="#FFE999" fill-opacity="0.7"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M52.5442 207.742C49.5183 207.742 47.0653 210.195 47.0653 213.221V292.16L28.2221 260.451C26.6654 257.831 23.5477 257.338 21.2586 259.35C18.9694 261.361 18.3756 265.115 19.9323 267.734L47.0653 313.392V434.098C47.0653 437.124 49.5183 439.577 52.5442 439.577C55.5702 439.577 58.0232 437.124 58.0232 434.098V334.605L73.2166 320.066C75.539 317.844 76.0057 313.855 74.2591 311.156C72.5125 308.458 69.2139 308.072 66.8914 310.294L58.0232 318.78V273.652L81.5394 245.085C83.5377 242.657 83.5395 238.72 81.5434 236.291C79.5473 233.861 76.3092 233.86 74.3109 236.287L58.0232 256.073V213.221C58.0232 210.195 55.5702 207.742 52.5442 207.742Z" fill="#BC9E51" fill-opacity="0.7"/>
 <ellipse cx="285.5" cy="322.5" rx="27.5" ry="52.5" fill="#FF9999" fill-opacity="0.7"/>
@@ -51,8 +51,9 @@
 <ellipse cx="223.068" cy="45.8843" rx="18.0675" ry="20.1157" fill="white"/>
 <ellipse cx="285.932" cy="45.8843" rx="18.0675" ry="20.1157" fill="white"/>
 <ellipse cx="255.738" cy="31.1157" rx="22.5225" ry="20.1157" fill="white"/>
+<rect width="320" height="568" fill="white" fill-opacity="0.7"/>
 <defs>
-<linearGradient id="paint0_linear_48_170" x1="160" y1="0" x2="160" y2="429" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint0_linear_156_2" x1="160" y1="0" x2="160" y2="429" gradientUnits="userSpaceOnUse">
 <stop stop-color="#B6EEF5"/>
 <stop offset="1" stop-color="#EDFDFF"/>
 </linearGradient>

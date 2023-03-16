@@ -22,7 +22,7 @@ function LevelBg(props) {
           src={Boy}
           alt="Boy image"
         />
-        <div className="level-title">{"Level "+ props.lvlnum}</div>
+        <div className="level-title" style={{ top: "100px" }}>{"Level "+ props.lvlnum}</div>
       </div>
     </div>
   );

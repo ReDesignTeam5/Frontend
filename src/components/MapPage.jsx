@@ -1,5 +1,5 @@
 import React from "react";
-import Map from "../assets/Map.svg";
+import Map from "../assets/mappage/Map.svg";
 import LevelTag from "./LevelTag";
 import { useAuthContext } from "../firebase/useAuthContext";
 import {useDocument} from '../firebase/useDocument';

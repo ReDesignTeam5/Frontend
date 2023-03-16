@@ -1,6 +1,6 @@
 import React from "react";
-import StarFilled from "../assets/StarFilled.svg";
-import StarEmpty from "../assets/StarEmpty.svg";
+import StarFilled from "../assets/scorepage/StarFilled.svg";
+import StarEmpty from "../assets/scorepage/StarEmpty.svg";
 
 function Stars(props) {
   const StarElement=props.count.map((value, idx)=>

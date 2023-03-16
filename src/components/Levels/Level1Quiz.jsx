@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import level1 from "../level1";
+import level1 from "../../level1";
 import { useNavigate } from "react-router-dom";
-import LevelBg from "./LevelBg";
-import Lvl1bg from "../assets/level1img/Lvl1bg.svg";
-import NextButton from "./NextButton";
+import LevelBg from "../LevelBg";
+import Lvl1bg from "../../assets/level1img/Lvl1bg.svg";
+import NextButton from "../NextButton";
 
 function Level1Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -18,7 +18,7 @@ function Level1Quiz() {
   const onClickNext = () => {
     setSelectedAnswerIndex(null);
     setResult((prev) => (selectedAnswer ? prev + 1 : prev));
-    if (activeQuestion != level1.length - 1) {
+    if (activeQuestion !== level1.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
       setActiveQuestion(0);
@@ -33,7 +33,7 @@ function Level1Quiz() {
       setSelectedAnswer(false);
     }
   };
-  
+
   return (
     <div>
       <LevelBg bg={Lvl1bg} lvlnum="1" />
@@ -44,8 +44,8 @@ function Level1Quiz() {
 
             <img
               className="coin-img"
-              src={require("../assets/level1img/" + image + ".svg")}
-              alt="coin image"
+              src={require("../../assets/level1img/" + image + ".svg")}
+              alt="coin"
             />
             <div className="opt-container">
               {choices.map((ans, index) => (

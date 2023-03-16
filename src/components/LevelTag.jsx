@@ -1,6 +1,6 @@
 import React from "react";
-import Tag from "../assets/Leveltag.svg";
-import Lock from "../assets/Lockedtag.svg"
+import Tag from "../assets/mappage/Leveltag.svg";
+import Lock from "../assets/mappage/Lockedtag.svg"
 
 function LevelTag(props) {
   function levelClick() {

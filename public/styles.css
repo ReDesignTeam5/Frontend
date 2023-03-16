@@ -5,6 +5,54 @@
 body {
   margin: 0px;
 }
+/* to keep?*/
+.background_level_2 {
+  background: linear-gradient(180deg, #f2ef96, #f7f4de);
+  width: 100vw;
+  height: 100vh;
+}
+.welcome-text {
+  -webkit-text-stroke: 3px #1d6995;
+  color: white;
+  font-family: "Lemon", cursive;
+  font-size: 70px;
+  text-align: center;
+  text-shadow: 0px 4px 2px #3ba3c399;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.continue-text {
+  -webkit-text-stroke: 3px #6baf33;
+  color: white;
+  font-family: "Lemon", cursive;
+  font-size: 70px;
+  text-align: center;
+  text-shadow: 0px 4px 2px #3ba3c399;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.inner-border {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 4px #3693c7, inset 0 0 0 8px white;
+}
+
+/* general css styles*/
+.background {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+/* title page*/
 .title {
   color: white;
   font-family: "Life Savers", cursive;
@@ -17,6 +65,7 @@ body {
   text-shadow: 0px 20px 0px #00000073;
   position: absolute;
   top: 20%;
+  margin: 20px;
 }
 
 .startbutton {
@@ -29,31 +78,19 @@ body {
   text-align: center;
   text-shadow: 0px 4px 2px #3ba3c399;
   position: absolute;
-  top: 80%;
+  bottom: 5%;
   border-radius: 100px;
   border: 15px solid #f6f6f6;
   box-shadow: 0 10px 5px rgba(0, 0, 0, 0.3);
-  left: 20%; /*how to make the button at the center of the page*/
   cursor: pointer;
+  margin: 20px;
 }
 .startbutton:hover {
   background-color: #37a1c2;
   color: white;
 }
-.background {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-}
-.background_level_2 {
-  background: linear-gradient(180deg, #f2ef96, #f7f4de);
-  width: 100vw;
-  height: 100vh;
-}
 
-
+/* map page*/
 .tag {
   background-repeat: no-repeat;
   background-size: cover;
@@ -93,7 +130,7 @@ button {
   top: 90%;
   left: 30%;
 }
-
+/* score page*/
 .center-container {
   display: flex;
   justify-content: center;
@@ -111,19 +148,17 @@ button {
   justify-content: space-evenly;
   align-items: center;
   position: absolute;
-  top: 250px;
+  top: 300px;
 }
 .star {
   height: 250px;
 }
 .level-title {
-  display: flex;
-  justify-content: center;
   border: 10px solid;
   border-radius: 70px;
   background-color: #3592c6;
   border-color: white;
-  box-shadow: 0px 0px 4px 2px #00000040;
+  box-shadow: 0px 0px 5px 5px #00000040;
   width: 550px;
   -webkit-text-stroke: 2px #1c6994;
   color: white;
@@ -132,8 +167,7 @@ button {
   text-align: center;
   text-shadow: 0px 2px 1px #3ba3c399;
   position: absolute;
-  top: 100px;
-  padding: 20px 50px;
+  padding: 10px 50px;
 }
 .score {
   -webkit-text-stroke: 4px #1c6994;
@@ -143,8 +177,7 @@ button {
   text-align: center;
   text-shadow: 0px 2px 1px #3ba3c399;
   position: absolute;
-  width: 100%;
-  top: 680px;
+  top: 700px;
 }
 .success-msg {
   -webkit-text-stroke: 4px #1c6994;
@@ -155,7 +188,7 @@ button {
   text-shadow: 0px 2px 1px #3ba3c399;
   position: absolute;
   width: 100%;
-  top: 1050px;
+  top: 1070px;
 }
 .score-num {
   border-radius: 70px;
@@ -169,8 +202,7 @@ button {
   text-align: center;
   text-shadow: 0px 2px 1px #3ba3c399;
   position: absolute;
-  top: 800px;
-  left: 23%;
+  top: 820px;
   padding: 10px 60px;
 }
 .btn-container {
@@ -187,47 +219,13 @@ button {
   justify-content: center;
 }
 
-.welcome-text {
-  -webkit-text-stroke: 3px #1d6995;
-  color: white;
-  font-family: "Lemon", cursive;
-  font-size: 70px;
-  text-align: center;
-  text-shadow: 0px 4px 2px #3ba3c399;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.continue-text {
-  -webkit-text-stroke: 3px #6baf33;
-  color: white;
-  font-family: "Lemon", cursive;
-  font-size: 70px;
-  text-align: center;
-  text-shadow: 0px 4px 2px #3ba3c399;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.inner-border {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
-  border-radius: 20px;
-  box-shadow: inset 0 0 0 4px #3693c7, inset 0 0 0 8px white;
-}
-
+/*level pages*/
 .body-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
-  
 }
 .body-text {
   position: absolute;
@@ -235,10 +233,11 @@ button {
   font-size: 70px;
   text-align: center;
   font-weight: 400;
-  width: 70%;
+  width: 60%;
   color: #6f463c;
-  top: 25%;
+  top: 23%;
 }
+/* level 1 */
 .coin-img {
   width: 350px;
   position: absolute;
@@ -259,17 +258,81 @@ button {
   top: 50px;
 }
 
-.opt-container{
+.opt-container {
   position: absolute;
-  top:53%;
+  top: 53%;
   width: 80%;
 }
 
-.selected-answer{
+.selected-answer {
   background: linear-gradient(180deg, #2d9be5, #268dd1);
 }
 
+.next-btn {
+  background-image: url(NextBtn.svg)!important;
+}
+.next-btn:active {
+  background-image: url(NextBtnClicked.svg)!important;
+}
 
+/* level 2 */
+#l2-value{
+  font-size: 210px;
+  font-weight: 500;
+}
+.dino-bank-img{
+  position: absolute;
+  width: 320px;
+  bottom: 22%;
+}
+.btn-temp1{
+  position: absolute;
+  top: 5%;
+  left:3%;
+  font-size: 50px;
+  border: solid 3px black;
+}
+.btn-temp2{
+  position: absolute;
+  top: 5%;
+  right:3%;
+  font-size: 50px;
+  border: solid 3px black;
+}
+/* level 3 */
+#l3-body-text{
+  font-size: 60px;
+}
+.l3-item-img{
+  height: 450px;
+  position: absolute;
+  top: 40%;
+}
+#l3-price{
+  font-size: 170px;
+  font-weight: 400;
+  position: absolute;
+  top:63%;
+}
+/* level 4 */
+.l4-item-img{
+  height: 400px;
+  width: 350px;
+  position: absolute;
+  top: 32%;
+  left:150px;
+}
+.l4-tag-img{
+  width:350px;
+  position: absolute;
+  top: 40%;
+  right:130px;
+}
+#paid-text{
+  top:55%;
+  width:70%;
+  font-size: 50px;
+}
 /* 
 font-family: 'Lemon', cursive;
 font-family: 'Lexend', sans-serif;
