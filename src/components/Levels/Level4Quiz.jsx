@@ -22,7 +22,6 @@ function Level4Quiz() {
   }
   function correct() {
     setResult((result) => result + 1);
-    onClickNext();
   }
 
   return (
@@ -55,7 +54,7 @@ function Level4Quiz() {
             <button className="btn-temp1" onClick={correct}>
               Correct
             </button>
-            <button className="btn-temp2" onClick={onClickNext}>
+            <button className="btn-temp2">
               Wrong
             </button>
           </div>

@@ -18,10 +18,13 @@ function ScorePage() {
     navigate("/MapPage"); //map
   }
   function replayClick() {
-    navigate("/MapPage"); //TODO
+    navigate("/Level"+level); //TODO
   }
   function nextClick() {
-    navigate("/MapPage"); //TODO
+    if (level < 4) {
+      var nextLvl = level + 1;
+      navigate("/Level"+nextLvl); //TODO
+    }
   }
   function saveScore() {
     //get user, update score and send to database
@@ -75,7 +78,7 @@ function ScorePage() {
               }}
             />
           </div>
-          <div className="btn-center">
+          {score==5?(<div className="btn-center">
             <button
               type="button"
               className="tag"
@@ -86,7 +89,7 @@ function ScorePage() {
                 width: "200px",
               }}
             />{" "}
-          </div>
+          </div>):null}
         </div>
       </div>
     </div>
