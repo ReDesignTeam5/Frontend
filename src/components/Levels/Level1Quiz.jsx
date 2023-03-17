@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import level1 from "../../level1";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
-import Lvl1bg from "../../assets/level1img/Lvl1bg.svg";
 import NextButton from "../NextButton";
 
 function Level1Quiz() {
@@ -36,7 +35,7 @@ function Level1Quiz() {
 
   return (
     <div>
-      <LevelBg bg={Lvl1bg} lvlnum="1" />
+      <LevelBg bg="lvl1-bg" lvlnum="1" />
       {!showResult ? (
         <div>
           <div className="body-container">

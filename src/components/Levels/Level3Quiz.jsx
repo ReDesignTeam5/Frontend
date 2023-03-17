@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
-import Lvl3bg from "../../assets/level3img/Lvl3bg.svg";
 import level3 from "../../level3";
 import NextButton from "../NextButton";
 
@@ -13,7 +12,7 @@ function Level3Quiz() {
   const { image, price, answer } = level3[activeQuestion];
 
   function onClickNext() {
-    if (activeQuestion != level3.length - 1) {
+    if (activeQuestion !== level3.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
       setActiveQuestion(0);
@@ -26,7 +25,7 @@ function Level3Quiz() {
 
   return (
     <div>
-      <LevelBg bg={Lvl3bg} lvlnum="3" />
+      <LevelBg bg="lvl3-bg" lvlnum="3" />
       {!showResult ? (
         <div>
           <div className="body-container">

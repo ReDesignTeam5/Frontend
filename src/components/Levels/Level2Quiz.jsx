@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
-import Lvl2bg from "../../assets/level2img/Lvl2bg.svg";
 import Dinobank from "../../assets/level2img/Dinobank.svg";
 
 function Level2Quiz() {
@@ -12,7 +11,7 @@ function Level2Quiz() {
   const level2 = ["5¢", "10¢", "20¢", "50¢", "$1"];
 
   function onClickNext() {
-    if (activeQuestion != level2.length - 1) {
+    if (activeQuestion !== level2.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
       setActiveQuestion(0);
@@ -26,7 +25,7 @@ function Level2Quiz() {
 
   return (
     <div>
-      <LevelBg bg={Lvl2bg} lvlnum="2" />
+      <LevelBg bg="lvl2-bg" lvlnum="2" />
       {!showResult ? (
         <div className="body-container">
           <div className="body-text">

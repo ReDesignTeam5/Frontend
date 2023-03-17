@@ -5,10 +5,7 @@ import Boy from "../assets/Boy.svg";
 function LevelBg(props) {
   return (
     <div
-      className="background"
-      style={{
-        backgroundImage: `url(${props.bg})`,
-      }}
+      className={props.bg}
     >
       <div className="center-container">
         <img className="score-bg" src={BrownBox} alt="Brown Box" />
@@ -20,7 +17,7 @@ function LevelBg(props) {
             bottom: "2%",
           }}
           src={Boy}
-          alt="Boy image"
+          alt="Boy"
         />
         <div className="level-title" style={{ top: "100px" }}>{"Level "+ props.lvlnum}</div>
       </div>

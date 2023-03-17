@@ -2,9 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body {
-  margin: 0px;
-}
+
 /* to keep?*/
 .background_level_2 {
   background: linear-gradient(180deg, #f2ef96, #f7f4de);
@@ -238,6 +236,10 @@ button {
   top: 23%;
 }
 /* level 1 */
+.lvl1-bg{
+  background: linear-gradient(180deg,#C0DA7A,#DBE4BD);
+  height: 100vh;
+}
 .coin-img {
   width: 350px;
   position: absolute;
@@ -262,6 +264,23 @@ button {
   position: absolute;
   top: 53%;
   width: 80%;
+  justify-content: space-evenly;
+}
+
+.tag-container {
+  position: absolute;
+  top: 40%;
+  width: 80%;
+  margin: 0px;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.coin-tag{
+  width: 300px;
+  display: flex !important;
+  
 }
 
 .selected-answer {
@@ -276,6 +295,10 @@ button {
 }
 
 /* level 2 */
+.lvl2-bg{
+  background: linear-gradient(180deg,#F2EF96,#F7F4DE);
+  height: 100vh;
+}
 #l2-value{
   font-size: 210px;
   font-weight: 500;
@@ -300,6 +323,10 @@ button {
   border: solid 3px black;
 }
 /* level 3 */
+.lvl3-bg{
+  background: linear-gradient(180deg,#F1B2AE,#FFECE7);
+  height: 100vh;
+}
 #l3-body-text{
   font-size: 60px;
 }
@@ -315,6 +342,10 @@ button {
   top:63%;
 }
 /* level 4 */
+.lvl4-bg{
+  background: linear-gradient(180deg,#C5B0F1,#F3EEFF);
+  height: 100vh;
+}
 .l4-item-img{
   height: 400px;
   width: 350px;
