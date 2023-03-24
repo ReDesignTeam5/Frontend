@@ -31,7 +31,6 @@ function RegistrationPage() {
     {!error_signup && navigate("/MapPage")};
   }
   async function signUsersIn(email){
-  
     login(email,'password');
     error_login? alert("no user"): navigate("/MapPage");
   }
