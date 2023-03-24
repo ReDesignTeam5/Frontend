@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import level1 from "../../level1";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
@@ -47,6 +47,12 @@ function Level1Quiz() {
       setSelectedAnswer(false);
     }
   };
+  useEffect(()=>{
+    if (showResult){
+      navigate("/ScorePage", { state: { score: result, level: 1} })
+    }
+  },[showResult]
+  )
 
   // for congrats
   const [showCongrats, setShowCongrats] = useState(false);
@@ -83,7 +89,6 @@ function Level1Quiz() {
       ) : (
         <div>
           <LevelBg bg="lvl1-bg" lvlnum="1" />
-          {!showResult ? (
             <div>
               <div className="body-container">
                 <div className="body-text">{question}</div>
@@ -118,9 +123,6 @@ function Level1Quiz() {
                 disabledFn={selectedAnswerIndex === null}
               />
             </div>
-          ) : (
-            navigate("/ScorePage", { state: { score: result, level: 1 } })
-          )}
         </div>
       )}
     </div>

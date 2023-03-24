@@ -59,7 +59,12 @@ function Level3Quiz() {
    }
   },[activeQuestion, levelStart])
 
- 
+  useEffect(()=>{
+    if (showResult){
+      navigate("/ScorePage", { state: { score: result, level: 3} })
+    }
+  },[showResult]
+  )
  
 
   return (
@@ -123,7 +128,6 @@ function Level3Quiz() {
       ) : (
         <div>
           <LevelBg bg="lvl3-bg" lvlnum="3" />
-          {!showResult ? (
             <div>
               <div className="body-container">
                 <div className="body-text" id="l3-body-text">
@@ -144,9 +148,6 @@ function Level3Quiz() {
               </div>
               {/* <NextButton click={onClickNext} /> */}
             </div>
-          ) : (
-            navigate("/ScorePage", { state: { score: result, level: 3 } })
-          )}
         </div>
       )}
     </div>

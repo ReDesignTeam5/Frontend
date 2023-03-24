@@ -42,6 +42,12 @@ function Level2Quiz() {
     }
   }
   useEffect(()=>{
+    if (showResult){
+      navigate("/ScorePage", { state: { score: result, level: 1 } })
+    }
+  },[showResult]
+  )
+  useEffect(()=>{
     if (isInitialMount.current) {
       isInitialMount.current = false;
    } else {
@@ -79,7 +85,7 @@ function Level2Quiz() {
       ) : (
         <div>
           <LevelBg bg="lvl2-bg" lvlnum="2" />
-          {!showResult ? (
+   
             <div className="body-container">
               <div className="body-text">
                 Insert a <p id="l2-value">{level2[activeQuestion]}</p>coin into
@@ -93,9 +99,6 @@ function Level2Quiz() {
                 Wrong
               </button>
             </div>
-          ) : (
-            navigate("/ScorePage", { state: { score: result, level: 2 } })
-          )}
         </div>
       )}
     </div>

@@ -11,58 +11,47 @@ import { useCollection } from "../firebase/useCollection";
 import { db } from "../firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { UserRecords } from "../firebase/UserRecordsObject";
+import { useDocument } from "../firebase/useDocument";
 
 function ScorePage() {
-  const { user } = useAuthContext();
   const name = useAuthContext().user.email.split("@")[0];
-  const { documents: users } = useCollection("users", ["uid", "==", name]);
   const score = useLocation()["state"].score;
   const level = useLocation()["state"].level;
+  const { document: result } = useDocument("users", name);
   const navigate = useNavigate();
 
-  function homeClick() {
-    // try {
-    //   console.log("working")
-    //   updateData();
-    // } catch (error) {
-    //   console.error(error);
-    // }
+  async function homeClick() {
+    await updateData();
     navigate("/MapPage"); //map
   }
-  function replayClick() {
+  async function replayClick() {
+    await updateData();
     navigate("/Level" + level); //TODO
   }
-  function nextClick() {
+  async function nextClick() {
+    await updateData();
     if (level < 4) {
       var nextLvl = level + 1;
       navigate("/Level" + nextLvl); //TODO
     }
   }
-  function saveScore() {
-    //get user, update score and send to database
-    console.log(user);
-  }
-  function processData() {
-    //load user data
-    var record = new UserRecords(users[0]);
-    return record;
-  }
+
   async function updateData() {
-    console.log(name); //to access user's name
-    //update user data
-    console.log(user);
-    console.log(users);
-    var record = processData();
+    console.log(name);
+    console.log(result);
+    console.log(score);
+    console.log(level);
+    var record = new UserRecords(result);
+    var past_score= record.score[level-1];
+    if (score >past_score){
+      record.setScore(level - 1, score);
+      const ref = doc(db, "users", name);
+      await updateDoc(ref, {
+        score: record.score,
+      });
+    }
     console.log(record);
-    //new update is score for round 5 being 5
-    record.setScore(level - 1, score);
-    const ref = doc(db, "users", "redesign");
-    await updateDoc(ref, {
-      score: record.score,
-    });
-    console.log("score is " + record.score);
-    console.log(user);
-    console.log("done!");
+    console.log("done!");   
   }
   var starCount = [0, 0, 0];
   if (score == 5) {
@@ -72,9 +61,12 @@ function ScorePage() {
   } else if (score > 0) {
     starCount = [1, 0, 0];
   }
-  useEffect(() => {
-    updateData();
-  }, []);
+  // useEffect(() => {
+  //   async function update(){
+  //     await updateData();
+  //   }
+  //   update();
+  // }, []);
   return (
     <div
       className="background"
