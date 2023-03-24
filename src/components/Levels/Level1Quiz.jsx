@@ -8,6 +8,7 @@ import Twentycentag from "../../assets/level1img/20cent.svg";
 import Fiftycentag from "../../assets/level1img/50cent.svg";
 import Onedollartag from "../../assets/level1img/1dollar.svg";
 import NextButton from "../NextButton";
+import Congrats from "../Congrats";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
 
@@ -36,6 +37,7 @@ function Level1Quiz() {
       setActiveQuestion(0);
       setShowResult(true);
     }
+    setShowCongrats(true);
   };
   const onAnsSelected = (ans, index) => {
     setSelectedAnswerIndex(index);
@@ -46,6 +48,12 @@ function Level1Quiz() {
     }
   };
 
+  // for congrats
+  const [showCongrats, setShowCongrats] = useState(false);
+  const handleClose = () => {
+    setShowCongrats(false);
+  };
+  
   return (
     <div>
       {!levelStart ? (
@@ -99,6 +107,10 @@ function Level1Quiz() {
                       {ans}
                     </button>
                   ))}
+                  {/* to display congrats message */}
+                  {showCongrats && (
+                    <Congrats open={showCongrats} handleClose={handleClose} correct ={selectedAnswer} />
+                  )}
                 </div>
               </div>
               <NextButton
