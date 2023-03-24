@@ -6,7 +6,9 @@ import NextButton from "../NextButton";
 import Coins from "../../assets/level4img/Coins.svg";
 import ManStore from "../../assets/level4img/ManStore.svg";
 import StoreSign from "../../assets/level4img/StoreSign.svg";
+import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
+
 
 function Level4Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -15,6 +17,8 @@ function Level4Quiz() {
   const navigate = useNavigate();
   const [newPage, setNewPage] = useState(false);
   const [levelStart, setLevelStart] = useState(false);
+  const { image, price, received } = level4[activeQuestion];
+  const name = useAuthContext().user.email.split("@")[0];
   const { image, price, received, answer } = level4[activeQuestion];
   const isInitialMount = useRef(true);
 
@@ -97,7 +101,7 @@ function Level4Quiz() {
                   className="body-text"
                   style={{ fontSize: "55px", width: "65%", top: "25%" }}
                 >
-                  Hi (name)! I have taken on a new job as a cashier. Help me
+                    Hi {name}! I have taken on a new job as a cashier. Help me
                   return the correct amount of change to customers!
                 </div>
                 <img

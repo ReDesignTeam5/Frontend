@@ -7,7 +7,6 @@ import Level2Quiz from "./Levels/Level2Quiz";
 import Level3Quiz from "./Levels/Level3Quiz";
 import Level4Quiz from "./Levels/Level4Quiz";
 import RegistrationPage from "./RegistrationPage";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {

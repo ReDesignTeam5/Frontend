@@ -22,7 +22,7 @@ function RegistrationPage() {
     const ref=doc(db,'users',name)
     await setDoc(ref,{
       name: name,
-      score:[10,10,10,10,10],
+      score:[0,10,10,10,10],
     })
   }
   function signUsersUp(email){
