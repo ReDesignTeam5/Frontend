@@ -8,6 +8,7 @@ import Twentycentag from "../../assets/level1img/20cent.svg";
 import Fiftycentag from "../../assets/level1img/50cent.svg";
 import Onedollartag from "../../assets/level1img/1dollar.svg";
 import NextButton from "../NextButton";
+import { useAuthContext } from "../../firebase/useAuthContext";
 
 function Level1Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -17,6 +18,7 @@ function Level1Quiz() {
   const [result, setResult] = useState(0);
   const [levelStart, setLevelStart] = useState(false);
   const navigate = useNavigate();
+  const name = useAuthContext().user.email.split("@")[0];
 
   const { question, choices, answer, image } = level1[activeQuestion];
 
@@ -52,7 +54,7 @@ function Level1Quiz() {
               className="body-text"
               style={{ fontSize: "55px", width: "60%" }}
             >
-              Hello, (name)! <p>Help me recognise these coins:</p>
+              Hello, {name}! <p>Help me recognise these coins:</p>
             </div>
             <div className="tag-container">
               <img className="coin-tag" src={Fivecenttag} alt="5 cent coin" />

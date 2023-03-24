@@ -1,13 +1,14 @@
 import React from "react";
 import Tag from "../assets/mappage/Leveltag.svg";
 import Lock from "../assets/mappage/Lockedtag.svg";
+import { useNavigate } from "react-router-dom";
 
 function LevelTag(props) {
-  // check if level is locked
-  const isLocked = props.score > 5;
+  const navigate = useNavigate();
 
   function levelClick() {
-    alert("Level " + props.number);
+    console.log("Level "+props.number +" Score: "+props.score)
+    navigate("/Level" + props.number);
   }
 
   return (
@@ -15,14 +16,14 @@ function LevelTag(props) {
       className="tag"
       type="button"
       onClick={levelClick}
-      disabled={props.score > 5}
+      disabled={props.locked}
       style={{
-        backgroundImage: props.score > 5 ? `url(${Lock})` : `url(${Tag})`,
+        backgroundImage: props.locked ? `url(${Lock})` : `url(${Tag})`,
         left: props.left,
         top: props.top,
       }}
     >
-      {isLocked ? null : <h1 className="number">{props.number}</h1>}
+      {props.locked ? null : <h1 className="number">{props.number}</h1>}
     </button>
   );
 }

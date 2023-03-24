@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
 import Dinobank from "../../assets/level2img/Dinobank.svg";
 import NextButton from "../NextButton";
+import { useAuthContext } from "../../firebase/useAuthContext";
 
 function Level2Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -11,6 +12,7 @@ function Level2Quiz() {
   const navigate = useNavigate();
   const [levelStart, setLevelStart] = useState(false);
   const level2 = ["5¢", "10¢", "20¢", "50¢", "$1"];
+  const name = useAuthContext().user.email.split("@")[0];
 
   const onClickStart = () => {
     setLevelStart(true);
@@ -38,7 +40,7 @@ function Level2Quiz() {
               className="body-text"
               style={{ fontSize: "50px", width: "65%", top: "25%" }}
             >
-              Great job in recognising the different coins (name)! Now, we need
+              Great job in recognising the different coins {name}! Now, we need
               to insert the correct coins into the dino-bank!
             </div>
             <img
