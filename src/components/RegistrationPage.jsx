@@ -8,7 +8,7 @@ import { useAuthContext } from "../firebase/useAuthContext";
 import {db} from '../firebase/config'
 import { useLogin } from "../firebase/useLogin";
 import { useLogout } from "../firebase/useLogout";
-
+import {ws} from "../websocket";
 function RegistrationPage() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -17,11 +17,12 @@ function RegistrationPage() {
   const {logout}= useLogout()
   const {user} = useAuthContext()
 
+
   async function createUser(){
     const ref=doc(db,'users',name)
     await setDoc(ref,{
       name: name,
-      score:[10,10,10,10,10],
+      score:[0,10,10,10,10],
     })
   }
   function signUsersUp(email){
@@ -30,7 +31,7 @@ function RegistrationPage() {
     {!error_signup && navigate("/MapPage")};
   }
   async function signUsersIn(email){
-    await login(email,'password');
+    login(email,'password');
     error_login? alert("no user"): navigate("/MapPage");
   }
   const handleSubmit = (e) => {

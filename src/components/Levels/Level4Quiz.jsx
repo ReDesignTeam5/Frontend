@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
 import level4 from "../../level4";
@@ -6,6 +6,9 @@ import NextButton from "../NextButton";
 import Coins from "../../assets/level4img/Coins.svg";
 import ManStore from "../../assets/level4img/ManStore.svg";
 import StoreSign from "../../assets/level4img/StoreSign.svg";
+import { useAuthContext } from "../../firebase/useAuthContext";
+import { ws } from "../../websocket";
+
 
 function Level4Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -15,6 +18,9 @@ function Level4Quiz() {
   const [newPage, setNewPage] = useState(false);
   const [levelStart, setLevelStart] = useState(false);
   const { image, price, received } = level4[activeQuestion];
+  const name = useAuthContext().user.email.split("@")[0];
+  const { image, price, received, answer } = level4[activeQuestion];
+  const isInitialMount = useRef(true);
 
   const onClickFirst = () => {
     setNewPage(true);
@@ -26,13 +32,34 @@ function Level4Quiz() {
     if (activeQuestion !== level4.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setActiveQuestion(0);
       setShowResult(true);
     }
   }
   function correct() {
     setResult((result) => result + 1);
+    onClickNext();
   }
+  async function statusCheck(){
+    if(levelStart)
+        {ws.send(JSON.stringify({type:"level",level:4,prompt: answer, coins:1,notes:2}));
+        let promise= new Promise ((resolve, reject)=>{
+          ws.onmessage=function(event){
+            var message= JSON.parse(event.data);
+            resolve(message);
+          }
+        })
+        let response= await promise;
+        console.log('response is '+ response);
+        response?correct():onClickNext();
+    }
+  } 
+  useEffect(()=>{
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+   } else {
+    statusCheck();
+   }
+  },[activeQuestion, levelStart])
 
   return (
     <div>
@@ -74,7 +101,7 @@ function Level4Quiz() {
                   className="body-text"
                   style={{ fontSize: "55px", width: "65%", top: "25%" }}
                 >
-                  Hi (name)! I have taken on a new job as a cashier. Help me
+                    Hi {name}! I have taken on a new job as a cashier. Help me
                   return the correct amount of change to customers!
                 </div>
                 <img
@@ -122,7 +149,7 @@ function Level4Quiz() {
                 </button>
                 <button className="btn-temp2">Wrong</button>
               </div>
-              <NextButton click={onClickNext} />
+              {/* <NextButton click={onClickNext} /> */}
             </div>
           ) : (
             navigate("/ScorePage", { state: { score: result, level: 4 } })
