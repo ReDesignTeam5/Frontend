@@ -31,7 +31,7 @@ function RegistrationPage() {
   }
   async function signUsersIn(email){
     await login(email,'password');
-    !error_login? alert("no user"): navigate("/MapPage");
+    error_login? alert("no user"): navigate("/MapPage");
   }
   const handleSubmit = (e) => {
     e.preventDefault();
