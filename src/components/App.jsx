@@ -26,7 +26,7 @@ function App() {
         <Route path="/RegistrationPage" element={<RegistrationPage />} />
         <Route path="/MapPage" element={<MapPage />} />
         <Route path="/ScorePage" element={<ScorePage />} />
-        <Route path="/test" element={<Level4start/>} />
+        <Route path="/test" element={<Level3start/>} />
       </Routes>
     </Router>
   );
