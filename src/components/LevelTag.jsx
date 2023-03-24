@@ -7,7 +7,7 @@ function LevelTag(props) {
   const navigate = useNavigate();
 
   function levelClick() {
-    console.log("Level "+props.number +" Score: "+props.score)
+    // console.log("Level "+props.number +" Score: "+props.score)
     navigate("/Level" + props.number);
   }
 

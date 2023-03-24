@@ -14,15 +14,13 @@ function RegistrationPage() {
   const navigate = useNavigate();
   const {error_signup,signup}= useSignup()
   const {error_login, login}= useLogin()
-  const {logout}= useLogout()
-  const {user} = useAuthContext()
 
 
   async function createUser(){
     const ref=doc(db,'users',name)
     await setDoc(ref,{
       name: name,
-      score:[0,10,10,10,10],
+      score:[-1,-1,-1,-1,-1],
     })
   }
   function signUsersUp(email){

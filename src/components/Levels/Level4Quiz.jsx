@@ -17,9 +17,8 @@ function Level4Quiz() {
   const navigate = useNavigate();
   const [newPage, setNewPage] = useState(false);
   const [levelStart, setLevelStart] = useState(false);
-  const { image, price, received } = level4[activeQuestion];
-  const name = useAuthContext().user.email.split("@")[0];
   const { image, price, received, answer } = level4[activeQuestion];
+  const name = useAuthContext().user.email.split("@")[0];
   const isInitialMount = useRef(true);
 
   const onClickFirst = () => {
@@ -61,6 +60,12 @@ function Level4Quiz() {
    }
   },[activeQuestion, levelStart])
 
+  useEffect(()=>{
+    if (showResult){
+      navigate("/ScorePage", { state: { score: result, level: 4} })
+    }
+  },[showResult]
+  )
   return (
     <div>
       {!levelStart ? (
@@ -118,7 +123,6 @@ function Level4Quiz() {
       ) : (
         <div>
           <LevelBg bg="lvl4-bg" lvlnum="4" />
-          {!showResult ? (
             <div>
               <div className="body-container">
                 <div className="body-text">
@@ -151,9 +155,6 @@ function Level4Quiz() {
               </div>
               {/* <NextButton click={onClickNext} /> */}
             </div>
-          ) : (
-            navigate("/ScorePage", { state: { score: result, level: 4 } })
-          )}
         </div>
       )}
     </div>
