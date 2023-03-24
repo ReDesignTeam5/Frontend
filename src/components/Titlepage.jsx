@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Background from "../assets/Background.svg";
 import { useNavigate } from "react-router-dom";
+import {ws} from "../websocket";
 
 function Titlepage(props) {
+  const [hardwareConnection, setHardwareConnection]=useState(false);
+
+  ws.onopen=(event)=>{
+    console.log('WebSocket connection established.');
+  }
+  ws.onclose=()=>{
+    console.log('WebSocket connection closed.');
+  }
+
+  useEffect(()=>{
+    statusCheck(); //check when loggin in
+  },[]);
+  
+  async function statusCheck(){
+    ws.send(JSON.stringify({type:"check"})); //check for hardware connection
+    let promise= new Promise ((resolve, reject)=>{
+      ws.onmessage=function(event){
+        var message= JSON.parse(event.data);
+        resolve(message);
+      }
+    })
+    let response= await promise;
+    setHardwareConnection(response);
+  }
+
   const navigate = useNavigate();
-  function handleClick() {
-    navigate("/RegistrationPage");
+
+  async function handleClick() {
+    await statusCheck();
+    !hardwareConnection? alert("no hardware connected"): navigate("/RegistrationPage"); 
   }
   return (
     <div

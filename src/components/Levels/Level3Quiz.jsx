@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
 import level3 from "../../level3";
@@ -6,6 +6,7 @@ import NextButton from "../NextButton";
 import VendingMachine from "../../assets/level3img/VendingMachine.svg";
 import PlasticBag from "../../assets/level3img/PlasticBag.svg";
 import Boy from "../../assets/Boy.svg";
+import { ws } from "../../websocket";
 
 function Level3Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -15,6 +16,8 @@ function Level3Quiz() {
   const { image, price, answer } = level3[activeQuestion];
   const [newPage, setNewPage] = useState(false);
   const [levelStart, setLevelStart] = useState(false);
+  const isInitialMount = useRef(true);
+
   const onClickFirst = () => {
     setNewPage(true);
   };
@@ -25,13 +28,37 @@ function Level3Quiz() {
     if (activeQuestion !== level3.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setActiveQuestion(0);
       setShowResult(true);
     }
   }
   function correct() {
     setResult((result) => result + 1);
+    onClickNext();
   }
+  async function statusCheck(){
+    if(levelStart)
+        {ws.send(JSON.stringify({type:"level",level:3,prompt: answer, coins:1,notes:2}));
+        let promise= new Promise ((resolve, reject)=>{
+          ws.onmessage=function(event){
+            var message= JSON.parse(event.data);
+            resolve(message);
+          }
+        })
+        let response= await promise;
+        console.log('response is '+ response);
+        response?correct():onClickNext();
+    }
+  } 
+  useEffect(()=>{
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+   } else {
+    statusCheck();
+   }
+  },[activeQuestion, levelStart])
+
+ 
+ 
 
   return (
     <div>
@@ -113,7 +140,7 @@ function Level3Quiz() {
                 </button>
                 <button className="btn-temp2">Wrong</button>
               </div>
-              <NextButton click={onClickNext} />
+              {/* <NextButton click={onClickNext} /> */}
             </div>
           ) : (
             navigate("/ScorePage", { state: { score: result, level: 3 } })

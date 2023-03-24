@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
 import Dinobank from "../../assets/level2img/Dinobank.svg";
 import NextButton from "../NextButton";
+import { ws } from "../../websocket";
 
 function Level2Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -11,6 +12,8 @@ function Level2Quiz() {
   const navigate = useNavigate();
   const [levelStart, setLevelStart] = useState(false);
   const level2 = ["5¢", "10¢", "20¢", "50¢", "$1"];
+  const prompt= [0.05,0.1,0.2,0.5,1];
+  const isInitialMount = useRef(true);
 
   const onClickStart = () => {
     setLevelStart(true);
@@ -19,10 +22,31 @@ function Level2Quiz() {
     if (activeQuestion !== level2.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setActiveQuestion(0);
       setShowResult(true);
     }
   }
+  async function statusCheck(){
+    if(levelStart)
+        {ws.send(JSON.stringify({type:"level",level:2,prompt:prompt[activeQuestion], coins:0,notes:2}));
+        let promise= new Promise ((resolve, reject)=>{
+          ws.onmessage=function(event){
+            var message= JSON.parse(event.data);
+            resolve(message);
+          }
+        })
+        let response= await promise;
+        console.log('response is '+ response);
+        response?correct():onClickNext();
+    }
+  }
+  useEffect(()=>{
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+   } else {
+    statusCheck();
+   }
+  },[activeQuestion, levelStart]); //cannot await setState- useEffect to watch it
+
   function correct() {
     setResult((result) => result + 1);
     onClickNext();
