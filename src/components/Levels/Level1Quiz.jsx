@@ -9,6 +9,7 @@ import Fiftycentag from "../../assets/level1img/50cent.svg";
 import Onedollartag from "../../assets/level1img/1dollar.svg";
 import NextButton from "../NextButton";
 import { useAuthContext } from "../../firebase/useAuthContext";
+import { ws } from "../../websocket";
 
 function Level1Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -27,6 +28,7 @@ function Level1Quiz() {
   };
   const onClickNext = () => {
     setSelectedAnswerIndex(null);
+    ws.send(JSON.stringify({type:"level",level:1,status:selectedAnswer}));
     setResult((prev) => (selectedAnswer ? prev + 1 : prev));
     if (activeQuestion !== level1.length - 1) {
       setActiveQuestion((prev) => prev + 1);

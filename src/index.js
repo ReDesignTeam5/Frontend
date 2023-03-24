@@ -6,6 +6,9 @@ import { AuthContextProvider } from "./firebase/AuthContext";
 const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container);
 root.render(
-    <AuthContextProvider>
-    <App />
-    </AuthContextProvider>);
+    <>
+        <AuthContextProvider>
+            <App />
+        </AuthContextProvider>
+    </>
+    );
