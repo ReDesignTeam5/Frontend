@@ -92,12 +92,6 @@ function Level2Quiz() {
                 the dino-bank!
               </div>
               <img className="dino-bank-img" src={Dinobank} alt="Dino-bank" />
-              <button className="btn-temp1" onClick={correct}>
-                Correct
-              </button>
-              <button className="btn-temp2" onClick={onClickNext}>
-                Wrong
-              </button>
             </div>
         </div>
       )}

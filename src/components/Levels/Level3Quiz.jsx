@@ -37,35 +37,41 @@ function Level3Quiz() {
     setResult((result) => result + 1);
     onClickNext();
   }
-  async function statusCheck(){
-    if(levelStart)
-        {ws.send(JSON.stringify({type:"level",level:3,prompt: answer, coins:1,notes:2}));
-        let promise= new Promise ((resolve, reject)=>{
-          ws.onmessage=function(event){
-            var message= JSON.parse(event.data);
-            resolve(message);
-          }
+  async function statusCheck() {
+    if (levelStart) {
+      ws.send(
+        JSON.stringify({
+          type: "level",
+          level: 3,
+          prompt: answer,
+          coins: 1,
+          notes: 2,
         })
-        let response= await promise;
-        console.log('response is '+ response);
-        response?correct():onClickNext();
+      );
+      let promise = new Promise((resolve, reject) => {
+        ws.onmessage = function (event) {
+          var message = JSON.parse(event.data);
+          resolve(message);
+        };
+      });
+      let response = await promise;
+      console.log("response is " + response);
+      response ? correct() : onClickNext();
     }
-  } 
-  useEffect(()=>{
+  }
+  useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
-   } else {
-    statusCheck();
-   }
-  },[activeQuestion, levelStart])
-
-  useEffect(()=>{
-    if (showResult){
-      navigate("/ScorePage", { state: { score: result, level: 3} })
+    } else {
+      statusCheck();
     }
-  },[showResult]
-  )
- 
+  }, [activeQuestion, levelStart]);
+
+  useEffect(() => {
+    if (showResult) {
+      navigate("/ScorePage", { state: { score: result, level: 3 } });
+    }
+  }, [showResult]);
 
   return (
     <div>
@@ -112,7 +118,7 @@ function Level3Quiz() {
                   className="body-text"
                   style={{ fontSize: "60px", width: "65%", top: "25%" }}
                 >
-                    Hi {name}! I need your help to buy some food from the vending
+                  Hi {name}! I need your help to buy some food from the vending
                   machine!
                 </div>
                 <img
@@ -121,33 +127,26 @@ function Level3Quiz() {
                   alt="Plastic Bag"
                 />
               </div>
-              <NextButton click = {onClickSecond} />
+              <NextButton click={onClickSecond} />
             </div>
           )}
         </div>
       ) : (
         <div>
           <LevelBg bg="lvl3-bg" lvlnum="3" />
-            <div>
-              <div className="body-container">
-                <div className="body-text" id="l3-body-text">
-                  Please insert the correct amount into the dino-bank:
-                </div>
-                <img
-                  className="l3-item-img"
-                  src={require("../../assets/level3img/" + image + ".svg")}
-                  alt="item"
-                />
-                <div className="body-text" id="l3-price">
-                  {price}
-                </div>
-                <button className="btn-temp1" onClick={correct}>
-                  Correct
-                </button>
-                <button className="btn-temp2">Wrong</button>
-              </div>
-              {/* <NextButton click={onClickNext} /> */}
+          <div className="body-container">
+            <div className="body-text" id="l3-body-text">
+              Please insert the correct amount into the dino-bank:
             </div>
+            <img
+              className="l3-item-img"
+              src={require("../../assets/level3img/" + image + ".svg")}
+              alt="item"
+            />
+            <div className="body-text" id="l3-price">
+              {price}
+            </div>
+          </div>
         </div>
       )}
     </div>

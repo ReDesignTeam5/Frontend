@@ -37,10 +37,6 @@ function ScorePage() {
   }
 
   async function updateData() {
-    console.log(name);
-    console.log(result);
-    console.log(score);
-    console.log(level);
     var record = new UserRecords(result);
     var past_score= record.score[level-1];
     if (score >past_score){
@@ -50,8 +46,6 @@ function ScorePage() {
         score: record.score,
       });
     }
-    console.log(record);
-    console.log("done!");   
   }
   var starCount = [0, 0, 0];
   if (score == 5) {
@@ -61,12 +55,6 @@ function ScorePage() {
   } else if (score > 0) {
     starCount = [1, 0, 0];
   }
-  // useEffect(() => {
-  //   async function update(){
-  //     await updateData();
-  //   }
-  //   update();
-  // }, []);
   return (
     <div
       className="background"

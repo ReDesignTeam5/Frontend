@@ -9,7 +9,6 @@ import StoreSign from "../../assets/level4img/StoreSign.svg";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
 
-
 function Level4Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -38,34 +37,41 @@ function Level4Quiz() {
     setResult((result) => result + 1);
     onClickNext();
   }
-  async function statusCheck(){
-    if(levelStart)
-        {ws.send(JSON.stringify({type:"level",level:4,prompt: answer, coins:1,notes:2}));
-        let promise= new Promise ((resolve, reject)=>{
-          ws.onmessage=function(event){
-            var message= JSON.parse(event.data);
-            resolve(message);
-          }
+  async function statusCheck() {
+    if (levelStart) {
+      ws.send(
+        JSON.stringify({
+          type: "level",
+          level: 4,
+          prompt: answer,
+          coins: 1,
+          notes: 2,
         })
-        let response= await promise;
-        console.log('response is '+ response);
-        response?correct():onClickNext();
+      );
+      let promise = new Promise((resolve, reject) => {
+        ws.onmessage = function (event) {
+          var message = JSON.parse(event.data);
+          resolve(message);
+        };
+      });
+      let response = await promise;
+      console.log("response is " + response);
+      response ? correct() : onClickNext();
     }
-  } 
-  useEffect(()=>{
+  }
+  useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
-   } else {
-    statusCheck();
-   }
-  },[activeQuestion, levelStart])
-
-  useEffect(()=>{
-    if (showResult){
-      navigate("/ScorePage", { state: { score: result, level: 4} })
+    } else {
+      statusCheck();
     }
-  },[showResult]
-  )
+  }, [activeQuestion, levelStart]);
+
+  useEffect(() => {
+    if (showResult) {
+      navigate("/ScorePage", { state: { score: result, level: 4 } });
+    }
+  }, [showResult]);
   return (
     <div>
       {!levelStart ? (
@@ -106,7 +112,7 @@ function Level4Quiz() {
                   className="body-text"
                   style={{ fontSize: "55px", width: "65%", top: "25%" }}
                 >
-                    Hi {name}! I have taken on a new job as a cashier. Help me
+                  Hi {name}! I have taken on a new job as a cashier. Help me
                   return the correct amount of change to customers!
                 </div>
                 <img
@@ -123,38 +129,30 @@ function Level4Quiz() {
       ) : (
         <div>
           <LevelBg bg="lvl4-bg" lvlnum="4" />
-            <div>
-              <div className="body-container">
-                <div className="body-text">
-                  <strong>Item sold:</strong>
-                </div>
-                <img
-                  className="l4-item-img"
-                  src={require("../../assets/level4img/" + image + ".svg")}
-                  alt="item"
-                />
-                <img
-                  className="l4-tag-img"
-                  src={require("../../assets/level4img/" + price + ".svg")}
-                  alt="price tag"
-                />
-                <div className="body-text" id="paid-text">
-                  <strong>Customer paid: </strong>
-                  <u>{received}</u>
-                  <br />
-                  <br />
-                  <p>
-                    Please insert the correct amount of change into the
-                    dino-bank!
-                  </p>
-                </div>
-                <button className="btn-temp1" onClick={correct}>
-                  Correct
-                </button>
-                <button className="btn-temp2">Wrong</button>
-              </div>
-              {/* <NextButton click={onClickNext} /> */}
+          <div className="body-container">
+            <div className="body-text">
+              <strong>Item sold:</strong>
             </div>
+            <img
+              className="l4-item-img"
+              src={require("../../assets/level4img/" + image + ".svg")}
+              alt="item"
+            />
+            <img
+              className="l4-tag-img"
+              src={require("../../assets/level4img/" + price + ".svg")}
+              alt="price tag"
+            />
+            <div className="body-text" id="paid-text">
+              <strong>Customer paid: </strong>
+              <u>{received}</u>
+              <br />
+              <br />
+              <p>
+                Please insert the correct amount of change into the dino-bank!
+              </p>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -236,8 +236,8 @@ button {
   top: 23%;
 }
 /* level 1 */
-.lvl1-bg{
-  background: linear-gradient(180deg,#C0DA7A,#DBE4BD);
+.lvl1-bg {
+  background: linear-gradient(180deg, #c0da7a, #dbe4bd);
   height: 100vh;
 }
 .coin-img {
@@ -272,15 +272,14 @@ button {
   top: 40%;
   width: 80%;
   margin: 0px;
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
 
-.coin-tag{
+.coin-tag {
   width: 300px;
   display: flex !important;
-  
 }
 
 .selected-answer {
@@ -288,84 +287,70 @@ button {
 }
 
 .next-btn {
-  background-image: url(NextBtn.svg)!important;
+  background-image: url(NextBtn.svg) !important;
 }
 .next-btn:active {
-  background-image: url(NextBtnClicked.svg)!important;
+  background-image: url(NextBtnClicked.svg) !important;
 }
 
 /* level 2 */
-.lvl2-bg{
-  background: linear-gradient(180deg,#F2EF96,#F7F4DE);
+.lvl2-bg {
+  background: linear-gradient(180deg, #f2ef96, #f7f4de);
   height: 100vh;
 }
-#l2-value{
+#l2-value {
   font-size: 210px;
   font-weight: 500;
 }
-.dino-bank-img{
+.dino-bank-img {
   position: absolute;
   width: 320px;
   bottom: 22%;
 }
-.btn-temp1{
-  position: absolute;
-  top: 5%;
-  left:3%;
-  font-size: 50px;
-  border: solid 3px black;
-}
-.btn-temp2{
-  position: absolute;
-  top: 5%;
-  right:3%;
-  font-size: 50px;
-  border: solid 3px black;
-}
 /* level 3 */
-.lvl3-bg{
-  background: linear-gradient(180deg,#F1B2AE,#FFECE7);
+.lvl3-bg {
+  background: linear-gradient(180deg, #f1b2ae, #ffece7);
   height: 100vh;
 }
-#l3-body-text{
+#l3-body-text {
   font-size: 60px;
 }
-.l3-item-img{
+.l3-item-img {
   height: 450px;
   position: absolute;
   top: 40%;
 }
-#l3-price{
+#l3-price {
   font-size: 170px;
   font-weight: 400;
   position: absolute;
-  top:63%;
+  top: 63%;
 }
 /* level 4 */
-.lvl4-bg{
-  background: linear-gradient(180deg,#C5B0F1,#F3EEFF);
+.lvl4-bg {
+  background: linear-gradient(180deg, #c5b0f1, #f3eeff);
   height: 100vh;
 }
-.l4-item-img{
+.l4-item-img {
   height: 400px;
   width: 350px;
   position: absolute;
   top: 32%;
-  left:150px;
+  left: 150px;
 }
-.l4-tag-img{
-  width:350px;
+.l4-tag-img {
+  width: 350px;
   position: absolute;
   top: 40%;
-  right:130px;
+  right: 130px;
 }
-#paid-text{
-  top:55%;
-  width:70%;
+#paid-text {
+  top: 55%;
+  width: 70%;
   font-size: 50px;
 }
 /* Congrats tag */
-.congrats-container{
+.congrats-container {
   display: flex;
   justify-content: center;
   width: 100%;
