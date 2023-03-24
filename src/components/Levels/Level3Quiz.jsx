@@ -6,6 +6,7 @@ import NextButton from "../NextButton";
 import VendingMachine from "../../assets/level3img/VendingMachine.svg";
 import PlasticBag from "../../assets/level3img/PlasticBag.svg";
 import Boy from "../../assets/Boy.svg";
+import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
 
 function Level3Quiz() {
@@ -16,6 +17,7 @@ function Level3Quiz() {
   const { image, price, answer } = level3[activeQuestion];
   const [newPage, setNewPage] = useState(false);
   const [levelStart, setLevelStart] = useState(false);
+  const name = useAuthContext().user.email.split("@")[0];
   const isInitialMount = useRef(true);
 
   const onClickFirst = () => {
@@ -105,7 +107,7 @@ function Level3Quiz() {
                   className="body-text"
                   style={{ fontSize: "60px", width: "65%", top: "25%" }}
                 >
-                  Hi (name)! I need your help to buy some food from the vending
+                    Hi {name}! I need your help to buy some food from the vending
                   machine!
                 </div>
                 <img
