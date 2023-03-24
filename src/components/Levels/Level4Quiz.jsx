@@ -17,7 +17,6 @@ function Level4Quiz() {
   const navigate = useNavigate();
   const [newPage, setNewPage] = useState(false);
   const [levelStart, setLevelStart] = useState(false);
-  const { image, price, received } = level4[activeQuestion];
   const name = useAuthContext().user.email.split("@")[0];
   const { image, price, received, answer } = level4[activeQuestion];
   const isInitialMount = useRef(true);

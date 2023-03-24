@@ -3,42 +3,67 @@ import RegistrationBackground from "../assets/Background.svg";
 import Dino from "../assets/Dino.svg";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../firebase/useSignup";
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc } from "firebase/firestore";
 import { useAuthContext } from "../firebase/useAuthContext";
-import {db} from '../firebase/config'
+import { db } from "../firebase/config";
 import { useLogin } from "../firebase/useLogin";
 import { useLogout } from "../firebase/useLogout";
-import {ws} from "../websocket";
+import { getDoc, collection, getDocs } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ws } from "../websocket";
 function RegistrationPage() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const {error_signup,signup}= useSignup()
-  const {error_login, login}= useLogin()
-  const {logout}= useLogout()
-  const {user} = useAuthContext()
-
+  const { error_signup, signup } = useSignup();
+  const { error_login, login } = useLogin();
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+  const auth = getAuth();
 
   async function createUser(){
     const ref=doc(db,'users',name)
     await setDoc(ref,{
       name: name,
-      score:[0,10,10,10,10],
+      score:[-1,-1,-1,-1,-1],
     })
   }
-  function signUsersUp(email){
-    signup(email,'password');
-    createUser();
-    {!error_signup && navigate("/MapPage")};
-  }
-  async function signUsersIn(email){
-    login(email,'password');
-    error_login? alert("no user"): navigate("/MapPage");
-  }
+  async function signUsersUp(email) {
+    try {
+      signup(email, "password");
+      console.log("User signed up");
+      await createUser();
+      console.log("User created in Firestore");
+      navigate("/MapPage");
+    } catch (error) {
+      console.error("Error signing up: ", error);
+      alert("Unable to sign up. Please try again later.");
+    }
+  };
+  async function signUsersIn(email) {
+    try {
+      await signInWithEmailAndPassword(auth, email, "password");
+      console.log("User signed in: ", auth.currentUser.uid);
+      // Get the name of the user from their email
+      const name = email.split("@")[0];
+      setName(name);
+      navigate("/MapPage");
+    } catch (error) {
+      console.error("Error signing in: ", error);
+      alert("Invalid email or password.");
+      signUsersUp(email);
+    }
+  };
+
+  // async function signUsersIn(email) {
+  //   login(email, "password");
+  //   error_login ? alert("no user") : navigate("/MapPage");
+  //   console.log("user not found");
+  // }
   const handleSubmit = (e) => {
     e.preventDefault();
-    var email= `${name}@gmail.com`
+    var email = `${name}@gmail.com`;
     //signUsersUp(email)
-    signUsersIn(email)
+    signUsersIn(email);
   };
 
   const handleChange = (e) => {
@@ -71,7 +96,6 @@ function RegistrationPage() {
                   htmlFor="name"
                   className="text-xl font-bold mb-2 text-[#704F3D] rounded-md p-2"
                   style={{ fontSize: "24px" }}
-
                 >
                   Please enter your name:
                 </label>
