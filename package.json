@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss public/styles.css -o public/styles.css",
-    "heroku-postbuild": "npm install"
+    "heroku-postbuild": "npm install --force"
   },
   "eslintConfig": {
     "extends": [
