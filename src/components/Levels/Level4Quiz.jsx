@@ -30,7 +30,7 @@ function Level4Quiz() {
   const onClickNext = () => {
     setSelectedAnswerIndex(null);
     ws.send(
-      JSON.stringify({ type: "level", level: 4, status: selectedAnswer })
+      JSON.stringify({ type: "level", level: 1, status: selectedAnswer })
     );
     setResult((prev) => (selectedAnswer ? prev + 1 : prev));
     if (activeQuestion !== level4.length - 1) {

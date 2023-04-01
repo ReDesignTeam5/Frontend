@@ -49,7 +49,7 @@ function Level6Quiz() {
           level: 6,
           prompt: answer,
           coins: 1,
-          notes: 2,
+          notes: 1,
         })
       );
       let promise = new Promise((resolve, reject) => {

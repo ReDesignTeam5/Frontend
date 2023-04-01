@@ -37,8 +37,8 @@ function Level5Quiz() {
           type: "level",
           level: 5,
           prompt: prompt[activeQuestion],
-          coins: 0,
-          notes: 2,
+          coins: 2,
+          notes: 0,
         })
       );
       let promise = new Promise((resolve, reject) => {
