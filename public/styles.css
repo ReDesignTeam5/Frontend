@@ -95,6 +95,9 @@
   width: 180px;
   height: 180px;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .number {
@@ -102,9 +105,6 @@
   font-family: "Life Savers", cursive;
   font-size: 60px;
   font-weight: 800;
-  position: relative;
-  margin-left: 40%;
-  margin-top: 30%;
 }
 button {
   all: unset;
@@ -327,18 +327,28 @@ button {
   top: 63%;
 }
 /* level 4 */
-.lvl4-bg {
+.lvl4-bg{
+  background: linear-gradient(180deg, #B0CEF1, #EEF7FF);
+  height: 100vh;
+}
+/* level 5 */
+.lvl5-bg{
+  background: linear-gradient(180deg, #FFC785, #FFF2DF);
+  height: 100vh;
+}
+/* level 6 */
+.lvl6-bg {
   background: linear-gradient(180deg, #c5b0f1, #f3eeff);
   height: 100vh;
 }
-.l4-item-img {
+.l6-item-img {
   height: 400px;
   width: 350px;
   position: absolute;
   top: 32%;
   left: 150px;
 }
-.l4-tag-img {
+.l6-tag-img {
   width: 350px;
   position: absolute;
   top: 40%;

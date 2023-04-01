@@ -1,157 +1,126 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import level4 from "../../level4";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
-import level4 from "../../level4";
+import Twodollartag from "../../assets/level4img/2dollartag.svg";
+import Fivedollartag from "../../assets/level4img/5dollartag.svg";
+import Tendollartag from "../../assets/level4img/10dollartag.svg";
+import Fiftydollartag from "../../assets/level4img/50dollartag.svg";
+import Hundreddollartag from "../../assets/level4img/100dollartag.svg";
 import NextButton from "../NextButton";
-import Coins from "../../assets/level4img/Coins.svg";
-import ManStore from "../../assets/level4img/ManStore.svg";
-import StoreSign from "../../assets/level4img/StoreSign.svg";
+import Congrats from "../Congrats";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
 
 function Level4Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [showResult, setShowResult] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  const [showResult, setShowResult] = useState({ sr: false, cg: false });
   const [result, setResult] = useState(0);
-  const navigate = useNavigate();
-  const [newPage, setNewPage] = useState(false);
   const [levelStart, setLevelStart] = useState(false);
-  const { image, price, received, answer } = level4[activeQuestion];
+  const navigate = useNavigate();
   const name = useAuthContext().user.email.split("@")[0];
-  const isInitialMount = useRef(true);
 
-  const onClickFirst = () => {
-    setNewPage(true);
-  };
+  const { choices, answer, image } = level4[activeQuestion];
+
   const onClickStart = () => {
     setLevelStart(true);
   };
-  function onClickNext() {
+  const onClickNext = () => {
+    setSelectedAnswerIndex(null);
+    ws.send(
+      JSON.stringify({ type: "level", level: 4, status: selectedAnswer })
+    );
+    setResult((prev) => (selectedAnswer ? prev + 1 : prev));
     if (activeQuestion !== level4.length - 1) {
+      setShowResult({ sr: false, cg: true });
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setShowResult(true);
+      setShowResult({ sr: true, cg: true });
     }
-  }
-  function correct() {
-    setResult((result) => result + 1);
-    onClickNext();
-  }
-  async function statusCheck() {
-    if (levelStart) {
-      ws.send(
-        JSON.stringify({
-          type: "level",
-          level: 4,
-          prompt: answer,
-          coins: 1,
-          notes: 2,
-        })
-      );
-      let promise = new Promise((resolve, reject) => {
-        ws.onmessage = function (event) {
-          var message = JSON.parse(event.data);
-          resolve(message);
-        };
-      });
-      let response = await promise;
-      console.log("response is " + response);
-      response ? correct() : onClickNext();
-    }
-  }
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
+  };
+  const onAnsSelected = (ans, index) => {
+    setSelectedAnswerIndex(index);
+    if (ans === answer) {
+      setSelectedAnswer(true);
     } else {
-      statusCheck();
+      setSelectedAnswer(false);
     }
-  }, [activeQuestion, levelStart]);
-
+  };
   useEffect(() => {
-    if (showResult) {
+    if (showResult.sr === true && showResult.cg === false) {
       navigate("/ScorePage", { state: { score: result, level: 4 } });
     }
   }, [showResult]);
+
+  const handleClose = () => {
+    setShowResult({ ...showResult, cg: false });
+  };
+
   return (
     <div>
       {!levelStart ? (
         <div>
-          {!newPage ? (
-            <div className="lvl4-bg">
-              <div className="body-container">
-                <div className="level-title" style={{ top: "100px" }}>
-                  Level 4
-                </div>
-                <div
-                  style={{
-                    width: "100vw",
-                    backgroundColor: "#826850",
-                    position: "absolute",
-                    height: "30%",
-                    bottom: "0%",
-                  }}
-                ></div>
-                <img
-                  style={{ width: "90%", top: "20%", position: "absolute" }}
-                  src={StoreSign}
-                  alt="Store Sign"
-                />
-                <img
-                  style={{ width: "90%", top: "30%", position: "absolute" }}
-                  src={ManStore}
-                  alt="Man at store"
-                />
-              </div>
-              <NextButton click={onClickFirst} />
+          <LevelBg bg="lvl4-bg" lvlnum="4" />
+          <div className="body-container">
+            <div
+              className="body-text"
+              style={{ fontSize: "55px", width: "60%" }}
+            >
+              Hello, {name}! <p>Help me recognise these notes:</p>
             </div>
-          ) : (
-            <div>
-              <LevelBg bg="lvl4-bg" lvlnum="4" />
-              <div className="body-container">
-                <div
-                  className="body-text"
-                  style={{ fontSize: "55px", width: "65%", top: "25%" }}
-                >
-                  Hi {name}! I have taken on a new job as a cashier. Help me
-                  return the correct amount of change to customers!
-                </div>
-                <img
-                  className="dino-bank-img"
-                  style={{ width: "400px", top: "55%", position: "absolute" }}
-                  src={Coins}
-                  alt="Coins"
-                />
-              </div>
-              <NextButton click={onClickStart} />
+            <div className="tag-container">
+              <img className="coin-tag" src={Twodollartag} alt="$2 note" />
+              <img className="coin-tag" src={Fivedollartag} alt="$5 note" />
+              <img className="coin-tag" src={Tendollartag} alt="$10 note" />
+              <img className="coin-tag" src={Fiftydollartag} alt="$50 note" />
+              <img
+                className="coin-tag"
+                src={Hundreddollartag}
+                alt="$100 note"
+              />
             </div>
-          )}
+          </div>
+          <NextButton click={onClickStart} />
         </div>
       ) : (
         <div>
           <LevelBg bg="lvl4-bg" lvlnum="4" />
-          <div className="body-container">
-            <div className="body-text">
-              <strong>Item sold:</strong>
+          <div>
+            <div className="body-container">
+              <div className="body-text">What note is this?</div>
+
+              <img
+                className="coin-img"
+                src={require("../../assets/level4img/" + image + ".svg")}
+                alt="note"
+              />
+              <div className="opt-container">
+                {choices.map((ans, index) => (
+                  <button
+                    onClick={() => onAnsSelected(ans, index)}
+                    key={ans}
+                    className={
+                      selectedAnswerIndex === index
+                        ? "option-btn selected-answer"
+                        : "option-btn"
+                    }
+                  >
+                    {ans}
+                  </button>
+                ))}
+                <Congrats
+                  open={showResult.cg}
+                  handleClose={handleClose}
+                  correct={selectedAnswer}
+                />
+              </div>
             </div>
-            <img
-              className="l4-item-img"
-              src={require("../../assets/level4img/" + image + ".svg")}
-              alt="item"
+            <NextButton
+              click={onClickNext}
+              disabledFn={selectedAnswerIndex === null}
             />
-            <img
-              className="l4-tag-img"
-              src={require("../../assets/level4img/" + price + ".svg")}
-              alt="price tag"
-            />
-            <div className="body-text" id="paid-text">
-              <strong>Customer paid: </strong>
-              <u>{received}</u>
-              <br />
-              <br />
-              <p>
-                Please insert the correct amount of change into the dino-bank!
-              </p>
-            </div>
           </div>
         </div>
       )}
