@@ -1,2 +1,2 @@
-const WS_URL = 'ws://Backend-Websocket.ranchu2000.repl.co/frontEnd';
-export const ws= new WebSocket("ws://localhost:8080/frontEnd");
+const WS_URL = 'ws://redesign-backend-websocket.herokuapp.com:80/frontEnd';
+export const ws= new WebSocket(WS_URL);
