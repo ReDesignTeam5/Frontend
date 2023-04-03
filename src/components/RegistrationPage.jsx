@@ -20,7 +20,7 @@ function RegistrationPage() {
     const ref=doc(db,'users',name)
     await setDoc(ref,{
       name: name,
-      score:[-1,-1,-1,-1,-1],
+      score:[-1,-1,-1,-1,-1,-1],
     })
   }
   function signUsersUp(email){
@@ -67,8 +67,8 @@ function RegistrationPage() {
               >
                 <label
                   htmlFor="name"
-                  className="text-xl font-bold mb-2 text-[#704F3D] rounded-md p-2"
-                  style={{ fontSize: "24px" }}
+                  className="text-xl font-bold mb-2 text-[#704F3D] rounded-md py-10"
+                  style={{ fontSize: "40px" }}
 
                 >
                   Please enter your name:
@@ -77,10 +77,10 @@ function RegistrationPage() {
                   type="text"
                   id="name"
                   name="name"
-                  className="border-2 border-gray-400 p-2 rounded-lg w-80"
+                  className="border-2 border-gray-400 p-2.5 rounded-lg w-11/12"
                   onChange={handleChange}
                   value={name}
-                  placeholder="redesign"
+                  placeholder="Name"
                 />
                 <button
                   type="submit"

@@ -12,19 +12,19 @@ function LevelTag(props) {
   }
 
   return (
-    <button
-      className="tag"
-      type="button"
-      onClick={levelClick}
-      disabled={props.locked}
-      style={{
-        backgroundImage: props.locked ? `url(${Lock})` : `url(${Tag})`,
-        left: props.left,
-        top: props.top,
-      }}
-    >
-      {props.locked ? null : <h1 className="number">{props.number}</h1>}
-    </button>
+      <button
+        className="tag"
+        type="button"
+        onClick={levelClick}
+        disabled={props.locked}
+        style={{
+          backgroundImage: props.locked ? `url(${Lock})` : `url(${Tag})`,
+          left: props.left,
+          top: props.top,
+        }}
+      >
+        {props.locked ? null : <h1 className="number">{props.number}</h1>}
+      </button>
   );
 }
 

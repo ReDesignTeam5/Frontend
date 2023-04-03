@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MapBackground from "../assets/scorepage/MapBackground.svg";
 import ScoreBackground from "../assets/scorepage/ScoreBackground.svg";
 import Stars from "./Stars";
@@ -6,8 +6,7 @@ import HomeBtn from "../assets/scorepage/HomeBtn.svg";
 import ReplayBtn from "../assets/scorepage/ReplayBtn.svg";
 import ContinueBtn from "../assets/scorepage/ContinueBtn.svg";
 import { useAuthContext } from "../firebase/useAuthContext";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useCollection } from "../firebase/useCollection";
+import { useLocation, useNavigate} from "react-router-dom";
 import { db } from "../firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { UserRecords } from "../firebase/UserRecordsObject";
@@ -48,7 +47,7 @@ function ScorePage() {
     }
   }
   var starCount = [0, 0, 0];
-  if (score == 5) {
+  if (score === 5) {
     starCount = [1, 1, 1];
   } else if (score > 2) {
     starCount = [1, 1, 0];
@@ -70,7 +69,7 @@ function ScorePage() {
         <div className="score">Score</div>
         <div className="score-num">{score}/5</div>
         <div className="success-msg">
-          {score == 5 ? "Complete!" : "Try Again!"}
+          {score === 5 ? "Complete!" : "Try Again!"}
         </div>
         <div className="btn-container">
           <div className="btn-center">
@@ -97,7 +96,7 @@ function ScorePage() {
               }}
             />
           </div>
-          {score == 5 ? (
+          {score === 5 ? (
             <div className="btn-center">
               <button
                 type="button"
