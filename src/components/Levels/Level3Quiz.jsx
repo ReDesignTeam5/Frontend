@@ -153,12 +153,13 @@ function Level3Quiz() {
             <div className="body-text" id="l3-price">
               {price}
               </div>
-              <Congrats
+              
+            </div>
+            <Congrats
                   open={showResult.cg}
                   handleClose={handleClose}
                   correct={anscorrect}
                 />
-          </div>
         </div>
       )}
     </div>
