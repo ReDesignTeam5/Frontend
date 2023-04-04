@@ -9,7 +9,7 @@ import Congrats from "../Congrats";
 
 function Level2Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [showResult, setShowResult] = useState({ sr: false, cg: false });
+  const [showResult, setShowResult] = useState({ sr: false, cg: false, cr:false });
   const [result, setResult] = useState(0);
   const navigate = useNavigate();
   const [levelStart, setLevelStart] = useState(false);
@@ -17,17 +17,16 @@ function Level2Quiz() {
   const name = useAuthContext().user.email.split("@")[0];
   const prompt = [0.05, 0.1, 0.2, 0.5, 1];
   const isInitialMount = useRef(true);
-  const [anscorrect, setAnsCorrect] = useState(false);
 
   const onClickStart = () => {
     setLevelStart(true);
   };
   function onClickNext() {
     if (activeQuestion !== level2.length - 1) {
-      setShowResult({ sr: false, cg: true });
+      setShowResult({ sr: false, cg: true , cr: false});
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setShowResult({ sr: true, cg: true });
+      setShowResult({ sr: true, cg: true, cr:false });
     }
   }
   async function statusCheck() {
@@ -67,7 +66,7 @@ function Level2Quiz() {
 
   function correct() {
     setResult((result) => result + 1);
-    setAnsCorrect(true);
+    setShowResult({...showResult, cr:true});
     onClickNext();
   }
   const handleClose = () => {
@@ -110,7 +109,7 @@ function Level2Quiz() {
           <Congrats
             open={showResult.cg}
             handleClose={handleClose}
-            correct={anscorrect}
+            correct={showResult.cr}
           />
         </div>
       )}
