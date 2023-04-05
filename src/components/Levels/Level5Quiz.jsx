@@ -9,7 +9,11 @@ import Congrats from "../Congrats";
 
 function Level5Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [showResult, setShowResult] = useState({ sr: false, cg: false });
+  const [showResult, setShowResult] = useState({
+    sr: false,
+    cg: false,
+    cr: false,
+  });
   const [result, setResult] = useState(0);
   const navigate = useNavigate();
   const [levelStart, setLevelStart] = useState(false);
@@ -17,17 +21,25 @@ function Level5Quiz() {
   const name = useAuthContext().user.email.split("@")[0];
   const prompt = [2, 5, 10, 2, 5];
   const isInitialMount = useRef(true);
-  const [anscorrect, setAnsCorrect] = useState(false);
 
   const onClickStart = () => {
     setLevelStart(true);
   };
-  function onClickNext() {
+  function wrong() {
     if (activeQuestion !== level5.length - 1) {
-      setShowResult({ sr: false, cg: true });
+      setShowResult({ sr: false, cg: true, cr: false });
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setShowResult({ sr: true, cg: true });
+      setShowResult({ sr: true, cg: true, cr: false });
+    }
+  }
+  function correct() {
+    setResult((result) => result + 1);
+    if (activeQuestion !== level5.length - 1) {
+      setShowResult({ sr: false, cg: true, cr: true });
+      setActiveQuestion((prev) => prev + 1);
+    } else {
+      setShowResult({ sr: true, cg: true, cr: true });
     }
   }
   async function statusCheck() {
@@ -49,7 +61,7 @@ function Level5Quiz() {
       });
       let response = await promise;
       console.log("response is " + response);
-      response ? correct() : onClickNext();
+      response ? correct() : wrong();
     }
   }
   useEffect(() => {
@@ -65,11 +77,6 @@ function Level5Quiz() {
     }
   }, [activeQuestion, levelStart]); //cannot await setState- useEffect to watch it
 
-  function correct() {
-    setResult((result) => result + 1);
-    setAnsCorrect(true);
-    onClickNext();
-  }
   const handleClose = () => {
     setShowResult({ ...showResult, cg: false });
   };
@@ -109,7 +116,7 @@ function Level5Quiz() {
           <Congrats
             open={showResult.cg}
             handleClose={handleClose}
-            correct={anscorrect}
+            correct={showResult.cr}
           />
         </div>
       )}

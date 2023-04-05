@@ -9,7 +9,11 @@ import Congrats from "../Congrats";
 
 function Level2Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [showResult, setShowResult] = useState({ sr: false, cg: false, cr:false });
+  const [showResult, setShowResult] = useState({
+    sr: false,
+    cg: false,
+    cr: false,
+  });
   const [result, setResult] = useState(0);
   const navigate = useNavigate();
   const [levelStart, setLevelStart] = useState(false);
@@ -21,12 +25,21 @@ function Level2Quiz() {
   const onClickStart = () => {
     setLevelStart(true);
   };
-  function onClickNext() {
+  function wrong() {
     if (activeQuestion !== level2.length - 1) {
-      setShowResult({ sr: false, cg: true , cr: false});
+      setShowResult({ sr: false, cg: true, cr: false });
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setShowResult({ sr: true, cg: true, cr:false });
+      setShowResult({ sr: true, cg: true, cr: false });
+    }
+  }
+  function correct() {
+    setResult((result) => result + 1);
+    if (activeQuestion !== level2.length - 1) {
+      setShowResult({ sr: false, cg: true, cr: true });
+      setActiveQuestion((prev) => prev + 1);
+    } else {
+      setShowResult({ sr: true, cg: true, cr: true });
     }
   }
   async function statusCheck() {
@@ -48,7 +61,7 @@ function Level2Quiz() {
       });
       let response = await promise;
       console.log("response is " + response);
-      response ? correct() : onClickNext();
+      response ? correct() : wrong();
     }
   }
   useEffect(() => {
@@ -64,13 +77,8 @@ function Level2Quiz() {
     }
   }, [activeQuestion, levelStart]); //cannot await setState- useEffect to watch it
 
-  function correct() {
-    setResult((result) => result + 1);
-    setShowResult({...showResult, cr:true});
-    onClickNext();
-  }
   const handleClose = () => {
-    setShowResult({ ...showResult, cg: false });
+    setShowResult({ ...showResult, cg: false, cr: false });
   };
 
   return (

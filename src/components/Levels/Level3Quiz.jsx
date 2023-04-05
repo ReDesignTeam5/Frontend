@@ -12,7 +12,11 @@ import Congrats from "../Congrats";
 
 function Level3Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [showResult, setShowResult] = useState({sr:false,cg:false});
+  const [showResult, setShowResult] = useState({
+    sr: false,
+    cg: false,
+    cr: false,
+  });
   const [result, setResult] = useState(0);
   const navigate = useNavigate();
   const { image, price, answer } = level3[activeQuestion];
@@ -20,7 +24,6 @@ function Level3Quiz() {
   const [levelStart, setLevelStart] = useState(false);
   const name = useAuthContext().user.email.split("@")[0];
   const isInitialMount = useRef(true);
-  const [anscorrect, setAnsCorrect] = useState(false);
 
   const onClickFirst = () => {
     setNewPage(true);
@@ -28,18 +31,22 @@ function Level3Quiz() {
   const onClickSecond = () => {
     setLevelStart(true);
   };
-  function onClickNext() {
+  function wrong() {
     if (activeQuestion !== level3.length - 1) {
-      setShowResult({sr:false,cg:true});
+      setShowResult({ sr: false, cg: true, cr: false });
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setShowResult({sr:true,cg:true});
+      setShowResult({ sr: true, cg: true, cr: false });
     }
   }
   function correct() {
     setResult((result) => result + 1);
-    setAnsCorrect(true);
-    onClickNext();
+    if (activeQuestion !== level3.length - 1) {
+      setShowResult({ sr: false, cg: true, cr: true });
+      setActiveQuestion((prev) => prev + 1);
+    } else {
+      setShowResult({ sr: true, cg: true, cr: true });
+    }
   }
   async function statusCheck() {
     if (levelStart) {
@@ -60,7 +67,7 @@ function Level3Quiz() {
       });
       let response = await promise;
       console.log("response is " + response);
-      response ? correct() : onClickNext();
+      response ? correct() : wrong();
     }
   }
   useEffect(() => {
@@ -158,7 +165,7 @@ function Level3Quiz() {
             <Congrats
                   open={showResult.cg}
                   handleClose={handleClose}
-                  correct={anscorrect}
+                  correct={showResult.cr}
                 />
         </div>
       )}
