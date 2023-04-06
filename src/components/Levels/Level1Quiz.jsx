@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import level1 from "../../level1";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
@@ -11,21 +11,24 @@ import NextButton from "../NextButton";
 import Congrats from "../Congrats";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
+import ButtonClick from "../../assets/Sounds/clickbutton.mp3";
+import CorrectSound from "../../assets/Sounds/correct.mp3";
+import WrongSound from "../../assets/Sounds/wrong.mp3";
 
 function Level1Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
-  const [showResult, setShowResult] = useState({sr:false,cg:false});
+  const [showResult, setShowResult] = useState({ sr: false, cg: false });
   const [result, setResult] = useState(0);
   const [levelStart, setLevelStart] = useState(false);
   const navigate = useNavigate();
   const name = useAuthContext().user.email.split("@")[0];
 
   const { question, choices, answer, image } = level1[activeQuestion];
-
   const onClickStart = () => {
     setLevelStart(true);
+    new Audio(ButtonClick).play();
   };
   const onClickNext = () => {
     setSelectedAnswerIndex(null);
@@ -34,11 +37,17 @@ function Level1Quiz() {
     );
     setResult((prev) => (selectedAnswer ? prev + 1 : prev));
     if (activeQuestion !== level1.length - 1) {
-      setShowResult({sr:false,cg:true});
+      setShowResult({ sr: false, cg: true });
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setShowResult({sr:true,cg:true});
+      setShowResult({ sr: true, cg: true });
     }
+    if (selectedAnswer) {
+      new Audio(CorrectSound).play();
+    } else {
+      new Audio(WrongSound).play();
+    }
+    new Audio(ButtonClick).play();
   };
   const onAnsSelected = (ans, index) => {
     setSelectedAnswerIndex(index);
@@ -49,13 +58,13 @@ function Level1Quiz() {
     }
   };
   useEffect(() => {
-    if (showResult.sr===true && showResult.cg===false) {
+    if (showResult.sr === true && showResult.cg === false) {
       navigate("/ScorePage", { state: { score: result, level: 1 } });
     }
   }, [showResult]);
 
   const handleClose = () => {
-    setShowResult({...showResult,cg:false});
+    setShowResult({ ...showResult, cg: false });
   };
 
   return (

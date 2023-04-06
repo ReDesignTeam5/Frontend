@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MapBackground from "../assets/scorepage/MapBackground.svg";
 import ScoreBackground from "../assets/scorepage/ScoreBackground.svg";
 import Stars from "./Stars";
@@ -6,11 +6,12 @@ import HomeBtn from "../assets/scorepage/HomeBtn.svg";
 import ReplayBtn from "../assets/scorepage/ReplayBtn.svg";
 import ContinueBtn from "../assets/scorepage/ContinueBtn.svg";
 import { useAuthContext } from "../firebase/useAuthContext";
-import { useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { db } from "../firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { UserRecords } from "../firebase/UserRecordsObject";
 import { useDocument } from "../firebase/useDocument";
+import Music from "../assets/Sounds/scorepage.mp3";
 
 function ScorePage() {
   const name = useAuthContext().user.email.split("@")[0];
@@ -37,8 +38,8 @@ function ScorePage() {
 
   async function updateData() {
     var record = new UserRecords(result);
-    var past_score= record.score[level-1];
-    if (score >past_score){
+    var past_score = record.score[level - 1];
+    if (score > past_score) {
       record.setScore(level - 1, score);
       const ref = doc(db, "users", name);
       await updateDoc(ref, {
@@ -54,6 +55,10 @@ function ScorePage() {
   } else if (score > 0) {
     starCount = [1, 0, 0];
   }
+
+  useEffect(() => {
+    new Audio(Music).play();
+  }, []);
   return (
     <div
       className="background"

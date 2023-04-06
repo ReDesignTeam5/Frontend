@@ -9,6 +9,9 @@ import StoreSign from "../../assets/level6img/StoreSign.svg";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
 import Congrats from "../Congrats";
+import ButtonClick from "../../assets/Sounds/clickbutton.mp3";
+import CorrectSound from "../../assets/Sounds/correct.mp3";
+import WrongSound from "../../assets/Sounds/wrong.mp3";
 
 function Level6Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -26,9 +29,11 @@ function Level6Quiz() {
   const isInitialMount = useRef(true);
 
   const onClickFirst = () => {
+    new Audio(ButtonClick).play();
     setNewPage(true);
   };
   const onClickStart = () => {
+    new Audio(ButtonClick).play();
     setLevelStart(true);
   };
   function wrong() {
@@ -38,6 +43,7 @@ function Level6Quiz() {
     } else {
       setShowResult({ sr: true, cg: true, cr: false });
     }
+    new Audio(WrongSound).play();
   }
   function correct() {
     setResult((result) => result + 1);
@@ -47,6 +53,7 @@ function Level6Quiz() {
     } else {
       setShowResult({ sr: true, cg: true, cr: true });
     }
+    new Audio(CorrectSound).play();
   }
   async function statusCheck() {
     if (levelStart) {
@@ -84,7 +91,7 @@ function Level6Quiz() {
     }
   }, [showResult]);
   const handleClose = () => {
-    setShowResult({...showResult,cg:false});
+    setShowResult({ ...showResult, cg: false });
   };
   return (
     <div>

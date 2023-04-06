@@ -9,6 +9,9 @@ import Boy from "../../assets/Boy.svg";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
 import Congrats from "../Congrats";
+import ButtonClick from "../../assets/Sounds/clickbutton.mp3";
+import CorrectSound from "../../assets/Sounds/correct.mp3";
+import WrongSound from "../../assets/Sounds/wrong.mp3";
 
 function Level3Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -27,9 +30,11 @@ function Level3Quiz() {
 
   const onClickFirst = () => {
     setNewPage(true);
+    new Audio(ButtonClick).play();
   };
   const onClickSecond = () => {
     setLevelStart(true);
+    new Audio(ButtonClick).play();
   };
   function wrong() {
     if (activeQuestion !== level3.length - 1) {
@@ -38,6 +43,7 @@ function Level3Quiz() {
     } else {
       setShowResult({ sr: true, cg: true, cr: false });
     }
+    new Audio(WrongSound).play();
   }
   function correct() {
     setResult((result) => result + 1);
@@ -47,6 +53,7 @@ function Level3Quiz() {
     } else {
       setShowResult({ sr: true, cg: true, cr: true });
     }
+    new Audio(CorrectSound).play();
   }
   async function statusCheck() {
     if (levelStart) {

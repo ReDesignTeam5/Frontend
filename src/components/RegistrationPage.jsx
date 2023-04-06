@@ -8,7 +8,8 @@ import { useAuthContext } from "../firebase/useAuthContext";
 import {db} from '../firebase/config'
 import { useLogin } from "../firebase/useLogin";
 import { useLogout } from "../firebase/useLogout";
-import {ws} from "../websocket";
+import { ws } from "../websocket";
+import ButtonClick from "../assets/Sounds/clickbutton.mp3";
 function RegistrationPage() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ function RegistrationPage() {
     var email= `${name}@gmail.com`
     //signUsersUp(email)
     signUsersIn(email)
+    new Audio(ButtonClick).play();
   };
 
   const handleChange = (e) => {

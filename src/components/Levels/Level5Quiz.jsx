@@ -6,6 +6,9 @@ import NextButton from "../NextButton";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
 import Congrats from "../Congrats";
+import ButtonClick from "../../assets/Sounds/clickbutton.mp3";
+import CorrectSound from "../../assets/Sounds/correct.mp3";
+import WrongSound from "../../assets/Sounds/wrong.mp3";
 
 function Level5Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -23,6 +26,7 @@ function Level5Quiz() {
   const isInitialMount = useRef(true);
 
   const onClickStart = () => {
+    new Audio(ButtonClick).play();
     setLevelStart(true);
   };
   function wrong() {
@@ -32,6 +36,7 @@ function Level5Quiz() {
     } else {
       setShowResult({ sr: true, cg: true, cr: false });
     }
+    new Audio(WrongSound).play();
   }
   function correct() {
     setResult((result) => result + 1);
@@ -41,6 +46,7 @@ function Level5Quiz() {
     } else {
       setShowResult({ sr: true, cg: true, cr: true });
     }
+    new Audio(CorrectSound).play();
   }
   async function statusCheck() {
     if (levelStart) {

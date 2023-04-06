@@ -11,6 +11,9 @@ import NextButton from "../NextButton";
 import Congrats from "../Congrats";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
+import ButtonClick from "../../assets/Sounds/clickbutton.mp3";
+import CorrectSound from "../../assets/Sounds/correct.mp3";
+import WrongSound from "../../assets/Sounds/wrong.mp3";
 
 function Level4Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -25,6 +28,7 @@ function Level4Quiz() {
   const { choices, answer, image } = level4[activeQuestion];
 
   const onClickStart = () => {
+    new Audio(ButtonClick).play();
     setLevelStart(true);
   };
   const onClickNext = () => {
@@ -39,6 +43,12 @@ function Level4Quiz() {
     } else {
       setShowResult({ sr: true, cg: true });
     }
+    if (selectedAnswer) {
+      new Audio(CorrectSound).play();
+    } else {
+      new Audio(WrongSound).play();
+    }
+    new Audio(ButtonClick).play();
   };
   const onAnsSelected = (ans, index) => {
     setSelectedAnswerIndex(index);

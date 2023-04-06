@@ -2,12 +2,14 @@ import React from "react";
 import Tag from "../assets/mappage/Leveltag.svg";
 import Lock from "../assets/mappage/Lockedtag.svg";
 import { useNavigate } from "react-router-dom";
+import LevelTagButton from "../assets/Sounds/leveltagbutton.mp3";
 
 function LevelTag(props) {
   const navigate = useNavigate();
 
   function levelClick() {
     // console.log("Level "+props.number +" Score: "+props.score)
+    new Audio(LevelTagButton).play();
     navigate("/Level" + props.number);
   }
 
