@@ -15,27 +15,18 @@ function RegistrationPage() {
   const {error_signup,signup}= useSignup()
   const {error_login, login}= useLogin()
 
-
-  async function createUser(){
-    const ref=doc(db,'users',name)
-    await setDoc(ref,{
-      name: name,
-      score:[-1,-1,-1,-1,-1,-1],
-    })
-  }
-  function signUsersUp(email){
-    signup(email,'password');
-    createUser();
+  async function signUsersUp(email){
+    await signup(email,'password');
     {!error_signup && navigate("/MapPage")};
   }
   async function signUsersIn(email){
     login(email,'password');
     error_login? alert("no user"): navigate("/MapPage");
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     var email= `${name}@gmail.com`
-    //signUsersUp(email)
+    //await signUsersUp(email)
     signUsersIn(email)
   };
 
