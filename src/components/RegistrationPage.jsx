@@ -22,7 +22,8 @@ function RegistrationPage() {
   }
   async function signUsersIn(email){
     login(email,'password');
-    error_login? alert("no user"): navigate("/MapPage");
+    // error_login? alert("no user"): navigate("/MapPage");
+    console.log(error_login)
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ function RegistrationPage() {
             <div className="flex flex-col items-center justify-center h-full mt-12">
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col items-center justify-center h-full"
+                className="flex flex-col items-center justify-center h-full w-full"
               >
                 <label
                   htmlFor="name"
@@ -70,10 +71,11 @@ function RegistrationPage() {
                   type="text"
                   id="name"
                   name="name"
-                  className="border-2 border-gray-400 p-2.5 rounded-lg w-11/12"
+                  className="border-2 border-gray-400 p-2.5 rounded-lg w-11/12 text-4xl"
                   onChange={handleChange}
                   value={name}
                   placeholder="Name"
+                  style={{ height: "100px" }}
                 />
                 <button
                   type="submit"
