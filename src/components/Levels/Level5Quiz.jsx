@@ -10,7 +10,7 @@ import ButtonClick from "../../assets/Sounds/clickbutton.mp3";
 import CorrectSound from "../../assets/Sounds/correct.mp3";
 import WrongSound from "../../assets/Sounds/wrong.mp3";
 
-function Level2Quiz() {
+function Level5Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [showResult, setShowResult] = useState({
     sr: false,
@@ -20,17 +20,17 @@ function Level2Quiz() {
   const [result, setResult] = useState(0);
   const navigate = useNavigate();
   const [levelStart, setLevelStart] = useState(false);
-  const level2 = ["5¢", "10¢", "20¢", "50¢", "$1"];
+  const level5 = ["$2", "$5", "$10", "$2", "$5"];
   const name = useAuthContext().user.email.split("@")[0];
-  const prompt = [0.05, 0.1, 0.2, 0.5, 1];
+  const prompt = [2, 5, 10, 2, 5];
   const isInitialMount = useRef(true);
 
   const onClickStart = () => {
-    setLevelStart(true);
     new Audio(ButtonClick).play();
+    setLevelStart(true);
   };
   function wrong() {
-    if (activeQuestion !== level2.length - 1) {
+    if (activeQuestion !== level5.length - 1) {
       setShowResult({ sr: false, cg: true, cr: false });
       setActiveQuestion((prev) => prev + 1);
     } else {
@@ -40,7 +40,7 @@ function Level2Quiz() {
   }
   function correct() {
     setResult((result) => result + 1);
-    if (activeQuestion !== level2.length - 1) {
+    if (activeQuestion !== level5.length - 1) {
       setShowResult({ sr: false, cg: true, cr: true });
       setActiveQuestion((prev) => prev + 1);
     } else {
@@ -53,10 +53,10 @@ function Level2Quiz() {
       ws.send(
         JSON.stringify({
           type: "level",
-          level: 2,
+          level: 5,
           prompt: prompt[activeQuestion],
-          coins: 0,
-          notes: 2,
+          coins: 2,
+          notes: 0,
         })
       );
       let promise = new Promise((resolve, reject) => {
@@ -72,7 +72,7 @@ function Level2Quiz() {
   }
   useEffect(() => {
     if (showResult.sr === true && showResult.cg === false) {
-      navigate("/ScorePage", { state: { score: result, level: 2 } });
+      navigate("/ScorePage", { state: { score: result, level: 5 } });
     }
   }, [showResult]);
   useEffect(() => {
@@ -84,21 +84,20 @@ function Level2Quiz() {
   }, [activeQuestion, levelStart]); //cannot await setState- useEffect to watch it
 
   const handleClose = () => {
-    setShowResult({ ...showResult, cg: false, cr: false });
+    setShowResult({ ...showResult, cg: false });
   };
-
   return (
     <div>
       {!levelStart ? (
         <div>
-          <LevelBg bg="lvl2-bg" lvlnum="2" />
+          <LevelBg bg="lvl5-bg" lvlnum="5" />
           <div className="body-container">
             <div
               className="body-text"
               style={{ fontSize: "50px", width: "65%", top: "25%" }}
             >
-              Great job in recognising the different coins {name}! Now, we need
-              to insert the correct coins into the dino-bank!
+              Great job in recognising the different notes {name}! Now, we need
+              to insert the correct notes into the dino-bank!
             </div>
             <img
               className="dino-bank-img"
@@ -111,11 +110,11 @@ function Level2Quiz() {
         </div>
       ) : (
         <div>
-          <LevelBg bg="lvl2-bg" lvlnum="2" />
+          <LevelBg bg="lvl5-bg" lvlnum="5" />
 
           <div className="body-container">
             <div className="body-text">
-              Insert a <p id="l2-value">{level2[activeQuestion]}</p>coin into
+              Insert a <p id="l2-value">{level5[activeQuestion]}</p>note into
               the dino-bank!
             </div>
             <img className="dino-bank-img" src={Dinobank} alt="Dino-bank" />
@@ -131,4 +130,4 @@ function Level2Quiz() {
   );
 }
 
-export default Level2Quiz;
+export default Level5Quiz;

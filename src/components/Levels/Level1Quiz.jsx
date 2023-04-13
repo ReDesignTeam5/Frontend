@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import level1 from "../../level1";
 import { useNavigate } from "react-router-dom";
 import LevelBg from "../LevelBg";
@@ -11,33 +11,43 @@ import NextButton from "../NextButton";
 import Congrats from "../Congrats";
 import { useAuthContext } from "../../firebase/useAuthContext";
 import { ws } from "../../websocket";
+import ButtonClick from "../../assets/Sounds/clickbutton.mp3";
+import CorrectSound from "../../assets/Sounds/correct.mp3";
+import WrongSound from "../../assets/Sounds/wrong.mp3";
 
 function Level1Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
-  const [showResult, setShowResult] = useState(false);
+  const [showResult, setShowResult] = useState({ sr: false, cg: false });
   const [result, setResult] = useState(0);
   const [levelStart, setLevelStart] = useState(false);
   const navigate = useNavigate();
   const name = useAuthContext().user.email.split("@")[0];
 
   const { question, choices, answer, image } = level1[activeQuestion];
-
   const onClickStart = () => {
     setLevelStart(true);
+    new Audio(ButtonClick).play();
   };
   const onClickNext = () => {
     setSelectedAnswerIndex(null);
-    ws.send(JSON.stringify({type:"level",level:1,status:selectedAnswer}));
+    ws.send(
+      JSON.stringify({ type: "level", level: 1, status: selectedAnswer })
+    );
     setResult((prev) => (selectedAnswer ? prev + 1 : prev));
     if (activeQuestion !== level1.length - 1) {
+      setShowResult({ sr: false, cg: true });
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setActiveQuestion(0);
-      setShowResult(true);
+      setShowResult({ sr: true, cg: true });
     }
-    setShowCongrats(true);
+    if (selectedAnswer) {
+      new Audio(CorrectSound).play();
+    } else {
+      new Audio(WrongSound).play();
+    }
+    new Audio(ButtonClick).play();
   };
   const onAnsSelected = (ans, index) => {
     setSelectedAnswerIndex(index);
@@ -47,13 +57,16 @@ function Level1Quiz() {
       setSelectedAnswer(false);
     }
   };
+  useEffect(() => {
+    if (showResult.sr === true && showResult.cg === false) {
+      navigate("/ScorePage", { state: { score: result, level: 1 } });
+    }
+  }, [showResult]);
 
-  // for congrats
-  const [showCongrats, setShowCongrats] = useState(false);
   const handleClose = () => {
-    setShowCongrats(false);
+    setShowResult({ ...showResult, cg: false });
   };
-  
+
   return (
     <div>
       {!levelStart ? (
@@ -83,44 +96,42 @@ function Level1Quiz() {
       ) : (
         <div>
           <LevelBg bg="lvl1-bg" lvlnum="1" />
-          {!showResult ? (
-            <div>
-              <div className="body-container">
-                <div className="body-text">{question}</div>
+          <div>
+            <div className="body-container">
+              <div className="body-text">{question}</div>
 
-                <img
-                  className="coin-img"
-                  src={require("../../assets/level1img/" + image + ".svg")}
-                  alt="coin"
-                />
-                <div className="opt-container">
-                  {choices.map((ans, index) => (
-                    <button
-                      onClick={() => onAnsSelected(ans, index)}
-                      key={ans}
-                      className={
-                        selectedAnswerIndex === index
-                          ? "option-btn selected-answer"
-                          : "option-btn"
-                      }
-                    >
-                      {ans}
-                    </button>
-                  ))}
-                  {/* to display congrats message */}
-                  {showCongrats && (
-                    <Congrats open={showCongrats} handleClose={handleClose} correct ={selectedAnswer} />
-                  )}
-                </div>
-              </div>
-              <NextButton
-                click={onClickNext}
-                disabledFn={selectedAnswerIndex === null}
+              <img
+                className="coin-img"
+                src={require("../../assets/level1img/" + image + ".svg")}
+                alt="coin"
               />
+              <div className="opt-container">
+                {choices.map((ans, index) => (
+                  <button
+                    onClick={() => onAnsSelected(ans, index)}
+                    key={ans}
+                    className={
+                      selectedAnswerIndex === index
+                        ? "option-btn selected-answer"
+                        : "option-btn"
+                    }
+                  >
+                    {ans}
+                  </button>
+                ))}
+                {/* to display congrats message */}
+                <Congrats
+                  open={showResult.cg}
+                  handleClose={handleClose}
+                  correct={selectedAnswer}
+                />
+              </div>
             </div>
-          ) : (
-            navigate("/ScorePage", { state: { score: result, level: 1 } })
-          )}
+            <NextButton
+              click={onClickNext}
+              disabledFn={selectedAnswerIndex === null}
+            />
+          </div>
         </div>
       )}
     </div>

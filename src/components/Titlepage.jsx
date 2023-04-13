@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Background from "../assets/Background.svg";
 import { useNavigate } from "react-router-dom";
+import ButtonClick from "../assets/Sounds/clickbutton.mp3";
 import {ws} from "../websocket";
 
 function Titlepage(props) {
   const [hardwareConnection, setHardwareConnection]=useState(false);
-
+  
   ws.onopen=(event)=>{
     console.log('WebSocket connection established.');
   }
@@ -33,7 +34,8 @@ function Titlepage(props) {
 
   async function handleClick() {
     await statusCheck();
-    !hardwareConnection? alert("no hardware connected"): navigate("/RegistrationPage"); 
+    !hardwareConnection ? alert("no hardware connected") : navigate("/RegistrationPage"); 
+    new Audio(ButtonClick).play();
   }
   return (
     <div

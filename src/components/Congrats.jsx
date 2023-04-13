@@ -1,7 +1,5 @@
-import React from "react";
-import {
-  Dialog,
-} from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Dialog } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CongratsBackground from "../assets/Congratspage/congratsbg.svg";
 import IncorrectBackground from "../assets/Congratspage/incorrectbg.svg";
@@ -13,18 +11,17 @@ const useStyles = makeStyles({
   },
 });
 
-function Congrats({ open, handleClose, correct }) {
+function Congrats(props) {
   const classes = useStyles();
-  const popUpImage = correct?CongratsBackground: IncorrectBackground;
-
+  const popUpImage = props.correct ? CongratsBackground : IncorrectBackground;
   return (
     <div style={{}}>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
         fullWidth
         maxWidth="lg"
-        style={{boxShadow: "none",backgroundColor: "rgba(0, 0, 0, 0.5)"}}
+        style={{ boxShadow: "none", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         classes={{
           paper: classes.paper,
         }}
