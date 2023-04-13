@@ -102,7 +102,7 @@ function Level4Quiz() {
               <div className="body-text">What note is this?</div>
 
               <img
-                className="coin-img"
+                className="note-img"
                 src={require("../../assets/level4img/" + image + ".svg")}
                 alt="note"
               />
