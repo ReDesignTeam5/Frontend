@@ -23,7 +23,7 @@ function Level1Quiz() {
   const [result, setResult] = useState(0);
   const [levelStart, setLevelStart] = useState(false);
   const navigate = useNavigate();
-  const name = useAuthContext().user.email.split("@")[0];
+  // const name = useAuthContext().user.email.split("@")[0];
 
   const { question, choices, answer, image } = level1[activeQuestion];
   const onClickStart = () => {
@@ -77,7 +77,7 @@ function Level1Quiz() {
               className="body-text"
               style={{ fontSize: "55px", width: "60%" }}
             >
-              Hello, {name}! <p>Help me recognise these coins:</p>
+              Hello, Summit! <p>Help me recognise these coins:</p>
             </div>
             <div className="tag-container">
               <img className="coin-tag" src={Fivecenttag} alt="5 cent coin" />

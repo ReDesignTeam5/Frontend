@@ -34,7 +34,7 @@ function Titlepage(props) {
 
   async function handleClick() {
     await statusCheck();
-    !hardwareConnection ? alert("no hardware connected") : navigate("/RegistrationPage"); 
+    !hardwareConnection ? alert("no hardware connected") : navigate("/MapPage"); 
     new Audio(ButtonClick).play();
   }
   return (

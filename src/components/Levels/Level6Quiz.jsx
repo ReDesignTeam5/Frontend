@@ -25,7 +25,7 @@ function Level6Quiz() {
   const [newPage, setNewPage] = useState(false);
   const [levelStart, setLevelStart] = useState(false);
   const { image, price, received, answer } = level6[activeQuestion];
-  const name = useAuthContext().user.email.split("@")[0];
+  // const name = useAuthContext().user.email.split("@")[0];
   const isInitialMount = useRef(true);
 
   const onClickFirst = () => {
@@ -133,7 +133,7 @@ function Level6Quiz() {
                   className="body-text"
                   style={{ fontSize: "55px", width: "65%", top: "25%" }}
                 >
-                  Hi {name}! I have taken on a new job as a cashier. Help me
+                  Hi Summit! I have taken on a new job as a cashier. Help me
                   return the correct amount of change to customers!
                 </div>
                 <img

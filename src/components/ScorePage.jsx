@@ -14,10 +14,10 @@ import { useDocument } from "../firebase/useDocument";
 import Music from "../assets/Sounds/scorepage.mp3";
 
 function ScorePage() {
-  const name = useAuthContext().user.email.split("@")[0];
-  const score = useLocation()["state"].score;
-  const level = useLocation()["state"].level;
-  const { document: result } = useDocument("users", name);
+  // const name = useAuthContext().user.email.split("@")[0];
+  // const score = useLocation()["state"].score;
+  // const level = useLocation()["state"].level;
+  // const { document: result } = useDocument("users", name);
   const navigate = useNavigate();
 
   async function homeClick() {
@@ -36,17 +36,17 @@ function ScorePage() {
     }
   }
 
-  async function updateData() {
-    var record = new UserRecords(result);
-    var past_score = record.score[level - 1];
-    if (score > past_score) {
-      record.setScore(level - 1, score);
-      const ref = doc(db, "users", name);
-      await updateDoc(ref, {
-        score: record.score,
-      });
-    }
-  }
+  // async function updateData() {
+  //   var record = new UserRecords(result);
+  //   var past_score = record.score[level - 1];
+  //   if (score > past_score) {
+  //     record.setScore(level - 1, score);
+  //     const ref = doc(db, "users", name);
+  //     await updateDoc(ref, {
+  //       score: record.score,
+  //     });
+  //   }
+  // }
   var starCount = [0, 0, 0];
   if (score === 5) {
     starCount = [1, 1, 1];

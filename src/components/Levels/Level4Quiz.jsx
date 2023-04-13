@@ -23,7 +23,7 @@ function Level4Quiz() {
   const [result, setResult] = useState(0);
   const [levelStart, setLevelStart] = useState(false);
   const navigate = useNavigate();
-  const name = useAuthContext().user.email.split("@")[0];
+  // const name = useAuthContext().user.email.split("@")[0];
 
   const { choices, answer, image } = level4[activeQuestion];
 
@@ -78,7 +78,7 @@ function Level4Quiz() {
               className="body-text"
               style={{ fontSize: "55px", width: "60%" }}
             >
-              Hello, {name}! <p>Help me recognise these notes:</p>
+              Hello, Summit! <p>Help me recognise these notes:</p>
             </div>
             <div className="tag-container">
               <img className="coin-tag" src={Twodollartag} alt="$2 note" />

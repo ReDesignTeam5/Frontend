@@ -21,7 +21,7 @@ function Level5Quiz() {
   const navigate = useNavigate();
   const [levelStart, setLevelStart] = useState(false);
   const level5 = ["$2", "$5", "$10", "$2", "$5"];
-  const name = useAuthContext().user.email.split("@")[0];
+  // const name = useAuthContext().user.email.split("@")[0];
   const prompt = [2, 5, 10, 2, 5];
   const isInitialMount = useRef(true);
 
@@ -96,7 +96,7 @@ function Level5Quiz() {
               className="body-text"
               style={{ fontSize: "50px", width: "65%", top: "25%" }}
             >
-              Great job in recognising the different notes {name}! Now, we need
+              Great job in recognising the different notes Summit! Now, we need
               to insert the correct notes into the dino-bank!
             </div>
             <img
