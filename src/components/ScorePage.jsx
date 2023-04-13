@@ -16,20 +16,20 @@ import Music from "../assets/Sounds/scorepage.mp3";
 function ScorePage() {
   // const name = useAuthContext().user.email.split("@")[0];
   const score = useLocation()["state"].score;
-  // const level = useLocation()["state"].level;
+  const level = useLocation()["state"].level;
   // const { document: result } = useDocument("users", name);
   const navigate = useNavigate();
 
   async function homeClick() {
-    await updateData();
+    // await updateData();
     navigate("/MapPage"); //map
   }
   async function replayClick() {
-    await updateData();
+    // await updateData();
     navigate("/Level" + level); //TODO
   }
   async function nextClick() {
-    await updateData();
+    // await updateData();
     if (level < 4) {
       var nextLvl = level + 1;
       navigate("/Level" + nextLvl); //TODO
