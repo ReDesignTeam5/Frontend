@@ -15,7 +15,7 @@ import Music from "../assets/Sounds/scorepage.mp3";
 
 function ScorePage() {
   // const name = useAuthContext().user.email.split("@")[0];
-  // const score = useLocation()["state"].score;
+  const score = useLocation()["state"].score;
   // const level = useLocation()["state"].level;
   // const { document: result } = useDocument("users", name);
   const navigate = useNavigate();

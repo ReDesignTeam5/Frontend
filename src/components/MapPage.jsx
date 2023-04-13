@@ -25,7 +25,7 @@ function MapPage() {
 
   return (
     <div className="background" style={{ backgroundImage: `url(${Map})` }}>
-      {result && (
+      {true && (
         <div>
           <LevelTag
             number="1"
