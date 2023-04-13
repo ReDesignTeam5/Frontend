@@ -22,6 +22,7 @@ function Level4Quiz() {
   const [showResult, setShowResult] = useState({ sr: false, cg: false });
   const [result, setResult] = useState(0);
   const [levelStart, setLevelStart] = useState(false);
+
   const navigate = useNavigate();
   const name = useAuthContext().user.email.split("@")[0];
 
