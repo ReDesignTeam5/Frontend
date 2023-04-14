@@ -30,13 +30,13 @@ function MapPage() {
           <LevelTag
             number="1"
             left="45%"
-            top="80%"
+            top="71%"
             score="5"
             locked={false}
           />
           <LevelTag
             number="2"
-            left="10%"
+            left="13%"
             top="60%"
             score="5"
             locked={false}
@@ -44,7 +44,7 @@ function MapPage() {
           <LevelTag
             number="3"
             left="45%"
-            top="50%"
+            top="45%"
             score="5"
             locked={false}
           />
@@ -58,13 +58,13 @@ function MapPage() {
           <LevelTag
             number="5"
             left="45%"
-            top="18%"
+            top="15%"
             score="5"
             locked={false}
           />
           <LevelTag
             number="6"
-            left="8%"
+            left="10%"
             top="7%"
             score="5"
             locked={false}

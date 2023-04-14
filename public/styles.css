@@ -125,7 +125,7 @@ button {
   text-align: center;
   text-shadow: 0px 2px 1px #3ba3c399;
   position: absolute;
-  top: 94%;
+  top: 90%;
   left: 30%;
 }
 /* score page*/
@@ -147,7 +147,6 @@ button {
   align-items: center;
   position: absolute;
   top: 300px;
-  left: 11%;
 }
 .star {
   height: 250px;
@@ -208,7 +207,7 @@ button {
   display: flex;
   justify-content: space-evenly;
   position: absolute;
-  top: 1275px;
+  top: 1200px;
   width: 100%;
   height: 200px;
 }
@@ -234,7 +233,7 @@ button {
   font-weight: 400;
   width: 70%;
   color: #6f463c;
-  top: 30%;
+  top: 23%;
 }
 /* level 1 */
 .lvl1-bg {
@@ -244,7 +243,7 @@ button {
 .coin-img {
   width: 350px;
   position: absolute;
-  top: 36%;
+  top: 33%;
 }
 .option-btn {
   font-family: "Lexend", sans-serif;
@@ -263,14 +262,14 @@ button {
 
 .opt-container {
   position: absolute;
-  top: 55%;
+  top: 53%;
   width: 80%;
   justify-content: space-evenly;
 }
 
 .tag-container {
   position: absolute;
-  top: 45%;
+  top: 40%;
   width: 80%;
   margin: 0px;
   display: flex;
@@ -300,13 +299,13 @@ button {
   height: 100vh;
 }
 #l2-value {
-  font-size: 170px;
+  font-size: 210px;
   font-weight: 500;
 }
 .dino-bank-img {
   position: absolute;
   width: 320px;
-  bottom: 18%;
+  bottom: 22%;
 }
 /* level 3 */
 .lvl3-bg {
@@ -319,13 +318,13 @@ button {
 .l3-item-img {
   height: 450px;
   position: absolute;
-  top: 45%;
+  top: 40%;
 }
 #l3-price {
   font-size: 170px;
   font-weight: 400;
   position: absolute;
-  top: 68%;
+  top: 63%;
 }
 /* level 4 */
 .lvl4-bg{
@@ -349,9 +348,9 @@ button {
 }
 .l6-item-img {
   height: 400px;
-  width: 300px;
+  width: 350px;
   position: absolute;
-  top: 35%;
+  top: 32%;
   left: 150px;
 }
 .l6-tag-img {
